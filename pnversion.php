@@ -12,7 +12,7 @@ $dom = ZLanguage::getModuleDomain('Feeds');
 $modversion['name']           = 'Feeds';
 $modversion['displayname']    = __('Feeds', $dom);
 $modversion['oldnames']       = array('RSS');
-$modversion['description']    = __('Feeds module provide a feed reader to your website.', $dom);
+$modversion['description']    = __('The Feeds module provides a feed reader to your website.', $dom);
 $modversion['url']            = __(/*!module name that appears in URL*/'feeds', $dom);
 $modversion['version']        = '2.5';
 
