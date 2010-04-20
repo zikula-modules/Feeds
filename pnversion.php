@@ -1,32 +1,29 @@
 <?php
 /**
- * Zikula Application Framework
+ * Feeds
  *
  * @copyright (c) 2002, Zikula Development Team
- * @link http://www.zikula.org
- * @version $Id: pnversion.php 404 2010-04-20 10:01:26Z herr.vorragend $
- * @license GNU/GPL - http://www.gnu.org/copyleft/gpl.html
- * @package Zikula_Value_Addons
- * @subpackage Feeds
+ * @link      http://code.zikula.org/feeds/
+ * @version   $Id: pnversion.php 404 2010-04-20 10:01:26Z herr.vorragend $
+ * @license   GNU/GPL - http://www.gnu.org/copyleft/gpl.html
  */
 
-$vrdom = ZLanguage::getModuleDomain('Feeds');
-
+$dom = ZLanguage::getModuleDomain('Feeds');
 $modversion['name']           = 'Feeds';
-$modversion['displayname']    = __('Feeds', $vrdom);
-//! this defines the module's url
-$modversion['url']            = __('feeds', $vrdom);
-
-$modversion['description']    = __('Feed Reader.', $vrdom);
+$modversion['displayname']    = __('Feeds', $dom);
 $modversion['oldnames']       = array('RSS');
+$modversion['description']    = __('Feeds module provide a feed reader to your website.', $dom);
+$modversion['url']            = __(/*!module name that appears in URL*/'feeds', $dom);
 $modversion['version']        = '2.5';
 
-$modversion['changelog']      = 'pndocs/changelog.txt';
 $modversion['credits']        = 'pndocs/credits.txt';
 $modversion['help']           = 'pndocs/help.txt';
+$modversion['changelog']      = 'pndocs/changelog.txt';
 $modversion['license']        = 'pndocs/license.txt';
-$modversion['official']       = 1;
-$modversion['author']         = 'Mark West';
-$modversion['contact']        = 'http://www.markwest.me.uk/';
+
+$modversion['official']       = false;
+
+$modversion['author']         = 'Mark West, Christophe Beaujean';
+$modversion['contact']        = 'http://code.zikula.org/feeds';
 
 $modversion['securityschema'] = array('Feeds::Item' => 'Feed item name::Feed item ID');
