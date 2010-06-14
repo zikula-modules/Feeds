@@ -46,7 +46,7 @@ function Feeds_init()
     }
 
     // set up module variables
-    pnModSetVars('Feeds', $modvars);
+    ModUtil::setVars('Feeds', $modvars);
 
     // initialisation successful
     return true;
@@ -79,7 +79,7 @@ function Feeds_upgrade($oldversion)
             CacheUtil::createLocalDir('feeds');
 
             // migrate module vars
-            $tables = pnDBGetTables();
+            $tables = System::dbGetTables();
             $sql    = "UPDATE $tables[module_vars] SET pn_modname = 'Feeds' WHERE pn_modname = 'RSS'";
             if (!DBUtil::executeSQL($sql)) {
                 LogUtil::registerError(__('Error! Update attempt failed.', $dom));
@@ -87,7 +87,7 @@ function Feeds_upgrade($oldversion)
             }
 
             // create our default category
-            pnModSetVar('Feeds', 'enablecategorization', true);
+            ModUtil::setVar('Feeds', 'enablecategorization', true);
             if (!_feeds_createdefaultcategory()) {
                 LogUtil::registerError(__('Error! Update attempt failed.', $dom));
                 return '1.0';
@@ -99,7 +99,7 @@ function Feeds_upgrade($oldversion)
             }
 
             // update the permalinks
-            $shorturlsep = pnConfigGetVar('shorturlsseparator');            
+            $shorturlsep = System::getVar('shorturlsseparator');            
             $sql  = "UPDATE $tables[feeds] SET pn_urltitle = REPLACE(pn_name, ' ', '{$shorturlsep}')";
             if (!DBUtil::executeSQL($sql)) {
                 LogUtil::registerError(__('Error! Update attempt failed.', $dom));
@@ -112,7 +112,7 @@ function Feeds_upgrade($oldversion)
                              'usingcronjob' => 0,
                              'key' => md5(time()));
 
-            if (!pnModSetVars('Feeds', $modvars)) {
+            if (!ModUtil::setVars('Feeds', $modvars)) {
                 LogUtil::registerError(__('Error! Update attempt failed.', $dom));
                 return '2.1';
             }
@@ -141,10 +141,10 @@ function Feeds_delete()
     CacheUtil::removeLocalDir('feeds');
 
     // delete any module variables
-    pnModDelVar('Feeds');
+    ModUtil::delVar('Feeds');
 
     // delete entries from category registry
-    pnModDBInfoLoad('Categories');
+    ModUtil::dbInfoLoad('Categories');
     DBUtil::deleteWhere('categories_registry', "crg_modname = 'Feeds'");
     DBUtil::deleteWhere('categories_mapobj', "cmo_modname = 'Feeds'");
 

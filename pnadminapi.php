@@ -51,7 +51,7 @@ function Feeds_adminapi_create($args)
     }
 
     // Let any hooks know that we have created a new item.
-    pnModCallHooks('item', 'create', $args['fid'], array('module' => 'Feeds'));
+    ModUtil::callHooks('item', 'create', $args['fid'], array('module' => 'Feeds'));
 
     // Return the id of the newly created item to the calling process
     return $args['fid'];
@@ -72,7 +72,7 @@ function Feeds_adminapi_delete($args)
     }
 
     // Get the feed
-    $item = pnModAPIFunc('Feeds', 'user', 'get', array('fid' => $args['fid']));
+    $item = ModUtil::apiFunc('Feeds', 'user', 'get', array('fid' => $args['fid']));
 
     if (!$item) {
         return LogUtil::registerError(__('No such Feed found.', $dom));
@@ -88,7 +88,7 @@ function Feeds_adminapi_delete($args)
     }
 
     // Let any hooks know that we have deleted an item
-    pnModCallHooks('item', 'delete', $args['fid'], array('module' => 'Feeds'));
+    ModUtil::callHooks('item', 'delete', $args['fid'], array('module' => 'Feeds'));
 
     // Let the calling process know that we have finished successfully
     return true;
@@ -112,7 +112,7 @@ function Feeds_adminapi_update($args)
     }
 
     // Get the existing feed
-    $item = pnModAPIFunc('Feeds', 'user', 'get', array('fid' => $args['fid']));
+    $item = ModUtil::apiFunc('Feeds', 'user', 'get', array('fid' => $args['fid']));
 
     if (!$item) {
         return LogUtil::registerError(__('No such Feed found.', $dom));
@@ -147,7 +147,7 @@ function Feeds_adminapi_update($args)
     }
 
     // Let any hooks know that we have updated an item.
-    pnModCallHooks('item', 'update', $args['fid'], array('module' => 'Feeds'));
+    ModUtil::callHooks('item', 'update', $args['fid'], array('module' => 'Feeds'));
 
     // Let the calling process know that we have finished successfully
     return true;
@@ -168,10 +168,10 @@ function Feeds_adminapi_purgepermalinks($args)
     }
 
     // disable categorization to do this (if enabled)
-    $catenabled = pnModGetVar('Feeds', 'enablecategorization');
+    $catenabled = ModUtil::getVar('Feeds', 'enablecategorization');
     if ($catenabled) {
-        pnModSetVar('Feeds', 'enablecategorization', false);
-        pnModDBInfoLoad('Feeds', 'Feeds', true);
+        ModUtil::setVar('Feeds', 'enablecategorization', false);
+        ModUtil::dbInfoLoad('Feeds', 'Feeds', true);
     }
 
     // get all the ID and permalink of the table
@@ -190,7 +190,7 @@ function Feeds_adminapi_purgepermalinks($args)
 
     // restore the categorization if was enabled
     if ($catenabled) {
-        pnModSetVar('Feeds', 'enablecategorization', true);
+        ModUtil::setVar('Feeds', 'enablecategorization', true);
     }
 
     if (empty($data)) {
@@ -217,14 +217,14 @@ function Feeds_adminapi_getlinks()
     $dom = ZLanguage::getModuleDomain('Feeds');
 
     if (SecurityUtil::checkPermission('Feeds::', '::', ACCESS_READ)) {
-        $links[] = array('url' => pnModURL('Feeds', 'admin', 'view'), 'text' => __('View Feeds', $dom));
+        $links[] = array('url' => ModUtil::url('Feeds', 'admin', 'view'), 'text' => __('View Feeds', $dom));
     }
     if (SecurityUtil::checkPermission('Feeds::', '::', ACCESS_ADD)) {
-        $links[] = array('url' => pnModURL('Feeds', 'admin', 'new'), 'text' => __('Create a Feed', $dom));
+        $links[] = array('url' => ModUtil::url('Feeds', 'admin', 'new'), 'text' => __('Create a Feed', $dom));
     }
     if (SecurityUtil::checkPermission('Feeds::', '::', ACCESS_ADMIN)) {
-        $links[] = array('url' => pnModURL('Feeds', 'admin', 'view', array('purge' => 1)), 'text' => __('Purge PermaLinks', $dom));
-        $links[] = array('url' => pnModURL('Feeds', 'admin', 'modifyconfig'), 'text' => __('Settings', $dom));
+        $links[] = array('url' => ModUtil::url('Feeds', 'admin', 'view', array('purge' => 1)), 'text' => __('Purge PermaLinks', $dom));
+        $links[] = array('url' => ModUtil::url('Feeds', 'admin', 'modifyconfig'), 'text' => __('Settings', $dom));
     }
 
     return $links;

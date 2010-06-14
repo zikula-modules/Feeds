@@ -31,7 +31,7 @@ function Feeds_pntables()
                                          'url'      => "C(255) NOTNULL DEFAULT ''");
 
     // Enable categorization services
-    $pntable['feeds_db_extra_enable_categorization'] = pnModGetVar('Feeds', 'enablecategorization');
+    $pntable['feeds_db_extra_enable_categorization'] = ModUtil::getVar('Feeds', 'enablecategorization');
     $pntable['feeds_primary_key_column'] = 'fid';
 
     // add standard data fields

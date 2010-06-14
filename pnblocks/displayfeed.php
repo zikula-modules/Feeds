@@ -47,7 +47,7 @@ function Feeds_displayfeedblock_display($blockinfo)
     }
 
     // Get variables from content block
-    $vars = pnBlockVarsFromContent($blockinfo['content']);
+    $vars = BlockUtil::varsFromContent($blockinfo['content']);
 
     // Defaults
     if (empty($vars['feedid'])) {
@@ -64,26 +64,26 @@ function Feeds_displayfeedblock_display($blockinfo)
     }
 
     // Get the feed item
-    $item = pnModAPIFunc('Feeds', 'user', 'get', array('fid' => $vars['feedid']));
+    $item = ModUtil::apiFunc('Feeds', 'user', 'get', array('fid' => $vars['feedid']));
 
     if (!$item) {
         return;
     }
 
     // Create output object
-    $render = & pnRender::getInstance('Feeds');
+    $render = & Renderer::getInstance('Feeds');
 
     //  Check if the block is cached
     if ($render->is_cached('feeds_block_displayfeed.htm', $item['fid'])) {
         $blockinfo['content'] = $render->fetch('feeds_block_displayfeed.htm', $item['fid']);
-        return pnBlockThemeBlock($blockinfo);
+        return BlockUtil::themeBlock($blockinfo);
     }
 
     // Get the feed source
-    $fullfeed = pnModAPIFunc('Feeds', 'user', 'getfeed', array('furl' => $item['url']));
+    $fullfeed = ModUtil::apiFunc('Feeds', 'user', 'getfeed', array('furl' => $item['url']));
 
     // Assign the module vars
-    $render->assign(pnModGetVar('Feeds'));
+    $render->assign(ModUtil::getVar('Feeds'));
 
     // Assign the item and feed
     $render->assign($item);
@@ -95,7 +95,7 @@ function Feeds_displayfeedblock_display($blockinfo)
    // Populate block info and pass to theme
     $blockinfo['content'] = $render->fetch('feeds_block_displayfeed.htm', $item['fid']);
 
-    return pnBlockThemeBlock($blockinfo);
+    return BlockUtil::themeBlock($blockinfo);
 }
 
 /**
@@ -104,10 +104,10 @@ function Feeds_displayfeedblock_display($blockinfo)
 function Feeds_displayfeedblock_modify($blockinfo)
 {
     // Create output object
-    $render = & pnRender::getInstance('Feeds', false);
+    $render = & Renderer::getInstance('Feeds', false);
 
     // Get current content
-    $vars = pnBlockVarsFromContent($blockinfo['content']);
+    $vars = BlockUtil::varsFromContent($blockinfo['content']);
 
     // Defaults
     if (empty($vars['feedid'])) {
@@ -128,7 +128,7 @@ function Feeds_displayfeedblock_modify($blockinfo)
 
     // The API function is called.  The arguments to the function are passed in
     // as their own arguments array
-    $items = pnModAPIFunc('Feeds', 'user', 'getall');
+    $items = ModUtil::apiFunc('Feeds', 'user', 'getall');
 
     // create an array for feednames and id's for the template
     $allfeeds = array();
@@ -155,7 +155,7 @@ function Feeds_displayfeedblock_update($blockinfo)
     $vars['displaydescription'] = FormUtil::getPassedValue('displaydescription', -1, 'POST');
     $vars['alternatelayout'] = FormUtil::getPassedValue('alternatelayout', -1, 'POST');
 
-    $blockinfo['content'] = pnBlockVarsToContent($vars);
+    $blockinfo['content'] = BlockUtil::varsToContent($vars);
 
     return $blockinfo;
 }

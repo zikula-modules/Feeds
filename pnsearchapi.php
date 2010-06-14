@@ -27,7 +27,7 @@ function Feeds_searchapi_options($args)
     if (SecurityUtil::checkPermission('Feeds::', '::', ACCESS_READ)) {
         // Create output object - this object will store all of our output so that
         // we can return it easily when required
-        $render = & pnRender::getInstance('Feeds');
+        $render = & Renderer::getInstance('Feeds');
         $render->assign('active', (isset($args['active']) && isset($args['active']['Feeds'])) || (!isset($args['active'])));
         return $render->fetch('feeds_search_options.htm');
     }
@@ -42,8 +42,8 @@ function Feeds_searchapi_search($args)
 {
     $dom = ZLanguage::getModuleDomain('Feeds');
 
-    pnModDBInfoLoad('Search');
-    $pntable = pnDBGetTables();
+    ModUtil::dbInfoLoad('Search');
+    $pntable = System::dbGetTables();
     $feedstable = $pntable['feeds'];
     $feedscolumn = $pntable['feeds_column'];
     $searchTable = $pntable['search_result'];
@@ -112,7 +112,7 @@ function Feeds_searchapi_search_check(&$args)
     $datarow = &$args['datarow'];
     $feedsId = $datarow['extra'];
 
-    $datarow['url'] = pnModUrl('Feeds', 'user', 'display', array('fid' => $feedsId));
+    $datarow['url'] = ModUtil::url('Feeds', 'user', 'display', array('fid' => $feedsId));
 
     return true;
 }

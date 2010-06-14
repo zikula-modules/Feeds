@@ -62,7 +62,7 @@ function Feeds_userapi_getall($args)
 
     $orderby = null;
     if (!empty($args['order'])) {
-        $pntable = pnDBGetTables();
+        $pntable = System::dbGetTables();
         $feedscolumn = $pntable['feeds_column'];
         $orderby = $feedscolumn[$args['order']].' DESC';
     }
@@ -78,7 +78,7 @@ function Feeds_userapi_getall($args)
     // root category which we need to build the relative path component
     if ($objArray && isset($args['catregistry']) && $args['catregistry']) {
         if (!Loader::loadClass('CategoryUtil')) {
-            pn_exit(__f('Error! Unable to load class [%s]', 'CategoryUtil'));
+            z_exit(__f('Error! Unable to load class [%s]', 'CategoryUtil'));
         }
         ObjectUtil::postProcessExpandedObjectArrayCategories($objArray, $args['catregistry']);
     }
@@ -168,11 +168,11 @@ function Feeds_userapi_getfeed($args)
     }
 
     // get all module vars for later use
-    $modvars = pnModGetVar('Feeds');
+    $modvars = ModUtil::getVar('Feeds');
 
     // check if the feed id is set, grab the feed from the db
     if (isset($args['fid'])) {
-        $feed = pnModAPIFunc('Feeds', 'user', 'get', array('fid' => $args['fid']));
+        $feed = ModUtil::apiFunc('Feeds', 'user', 'get', array('fid' => $args['fid']));
         $url = $feed['url'];
     } elseif(isset($args['furl'])) {
         $url = $args['furl'];
@@ -262,7 +262,7 @@ function Feeds_userapi_encodeurl($args)
             $args['args']['fid'] = $args['args']['objectid'];
         }
         // get the item (will be cached by DBUtil)
-        $item = pnModAPIFunc('Feeds', 'user', 'get', array('fid' => $args['args']['fid']));
+        $item = ModUtil::apiFunc('Feeds', 'user', 'get', array('fid' => $args['args']['fid']));
         $vars = $item['urltitle'];
     }
 
@@ -300,12 +300,12 @@ function Feeds_userapi_decodeurl($args)
     $funcs = array('main', 'view', 'display');
     // set the correct function name based on our input
     if (empty($args['vars'][2])) {
-        pnQueryStringSetVar('func', 'main');
+        System::queryStringSetVar('func', 'main');
     } elseif (!in_array($args['vars'][2], $funcs)) {
-        pnQueryStringSetVar('func', 'display');
+        System::queryStringSetVar('func', 'display');
         $nextvar = 2;
     } else {
-        pnQueryStringSetVar('func', $args['vars'][2]);
+        System::queryStringSetVar('func', $args['vars'][2]);
         $nextvar = 3;
     }
 
@@ -313,16 +313,16 @@ function Feeds_userapi_decodeurl($args)
     if (FormUtil::getPassedValue('func') == 'view' && isset($args['vars'][$nextvar])) {
         // get rid of unused vars
         $args['vars'] = array_slice($args['vars'], $nextvar);
-        pnQueryStringSetVar('prop', (string)$args['vars'][0]);
+        System::queryStringSetVar('prop', (string)$args['vars'][0]);
         if (isset ($args['vars'][1])) {
             // check if there's a page arg
             $varscount = count($args['vars']);
             ($args['vars'][$varscount-2] == 'startnum') ? $pagersize = 2 : $pagersize = 0;
             // extract the category path
             $cat = implode('/', array_slice($args['vars'], 1, $varscount - 1 - $pagersize));
-            pnQueryStringSetVar('cat', $cat);
+            System::queryStringSetVar('cat', $cat);
             if ($args['vars'][$varscount-2] == 'startnum') {
-                pnQueryStringSetVar('startnum', $args['vars'][$varscount-1]);
+                System::queryStringSetVar('startnum', $args['vars'][$varscount-1]);
             }
         }
     }
@@ -330,9 +330,9 @@ function Feeds_userapi_decodeurl($args)
     // identify the correct parameter to identify the page
     if (FormUtil::getPassedValue('func') == 'display') {
         if (is_numeric($args['vars'][$nextvar])) {
-            pnQueryStringSetVar('fid', $args['vars'][$nextvar]);
+            System::queryStringSetVar('fid', $args['vars'][$nextvar]);
         } else {
-            pnQueryStringSetVar('title', $args['vars'][$nextvar]);
+            System::queryStringSetVar('title', $args['vars'][$nextvar]);
         }
     }
 
