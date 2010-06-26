@@ -14,7 +14,7 @@
  * This function is called internally by the core whenever the module is
  * loaded.  It adds in the information
  */
-function Feeds_pntables()
+function Feeds_tables()()
 {
     // Initialise table array
     $pntable = array();

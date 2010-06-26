@@ -26,6 +26,6 @@
 
 <div class="z-formrow">
     <label for="feeds_numitems">{gt text='Number of items to display' domain='module_feeds'}</label>
-    <input id="feeds_numitems" type="text" name="numitems" value="{$numitems|varprepfordisplay}" />
+    <input id="feeds_numitems" type="text" name="numitems" value="{$numitems|safetext}" />
     <em class="z-formnote">{gt text='(upto the maximum supplied by the feed or -1 for all items)' domain='module_feeds'}</em>
 </div>

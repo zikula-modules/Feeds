@@ -43,7 +43,7 @@ function Feeds_searchapi_search($args)
     $dom = ZLanguage::getModuleDomain('Feeds');
 
     ModUtil::dbInfoLoad('Search');
-    $pntable = System::dbGetTables();
+    $pntable = DBUtil::getTables();
     $feedstable = $pntable['feeds'];
     $feedscolumn = $pntable['feeds_column'];
     $searchTable = $pntable['search_result'];

@@ -12,7 +12,7 @@
         <div>
             <input type="hidden" name="authid" value="{insert name='generateauthkey' module='Feeds'}" />
             <input type="hidden" name="confirmation" value="1" />
-            <input type="hidden" name="fid" value="{$fid|varprepfordisplay}" />
+            <input type="hidden" name="fid" value="{$fid|safetext}" />
             <div class="z-formbuttons">
                 {button src='button_ok.gif' set='icons/small' __alt='Confirm deletion?' __title='Confirm deletion?'}
                 <a href="{modurl modname='Feeds' type='admin' func='view'}">{img modname='core' src='button_cancel.gif' set='icons/small' __alt='Cancel' __title='Cancel'}</a>

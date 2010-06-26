@@ -7,12 +7,12 @@
     {assign var='feeditemtitle' value=$feeditem->get_title()}
     {if $displaydescription eq 0}
         <div>
-            <a href="{$feeditemlink|varprepfordisplay}" {if $openinnewwindow eq 1}target="_blank"{/if}>{$feeditemtitle|varprepfordisplay}</a>
+            <a href="{$feeditemlink|safetext}" {if $openinnewwindow eq 1}target="_blank"{/if}>{$feeditemtitle|safetext}</a>
         </div>
     {else}
         {assign var='feeditemdesc' value=$feeditem->get_description()}
         <div>
-            <a href="{$feeditemlink|varprepfordisplay}" {if $openinnewwindow eq 1}target="_blank"{/if}>{$feeditemtitle|varprepfordisplay}</a>
+            <a href="{$feeditemlink|safetext}" {if $openinnewwindow eq 1}target="_blank"{/if}>{$feeditemtitle|safetext}</a>
             <div class="feeditem-desc">{$feeditemdesc|varprephtmldisplay}</div>
         </div>
     {/if}

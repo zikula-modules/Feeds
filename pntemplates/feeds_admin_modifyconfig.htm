@@ -26,15 +26,15 @@
                 </div>
                 <div class="z-formrow">
                     <label for="feeds_itemsperpage">{gt text='Items per page'}</label>
-                    <input id="feeds_itemsperpage" type="text" name="itemsperpage" size="3" value="{$itemsperpage|varprepfordisplay}" />
+                    <input id="feeds_itemsperpage" type="text" name="itemsperpage" size="3" value="{$itemsperpage|safetext}" />
                 </div>
                 <div class="z-formrow">
                     <label for="feeds_feedsperpage">{gt text='Number of feeds to list per page'}</label>
-                    <input id="feeds_feedsperpage" type="text" name="feedsperpage" size="3" value="{$feedsperpage|varprepfordisplay}" />
+                    <input id="feeds_feedsperpage" type="text" name="feedsperpage" size="3" value="{$feedsperpage|safetext}" />
                 </div>
                 <div class="z-formrow">
                     <label for="feeds_multifeedlimit">{gt text='Maximum items to add per feed'}</label>
-                    <input id="feeds_multifeedlimit" type="text" name="multifeedlimit" size="3" value="{$multifeedlimit|varprepfordisplay}" />
+                    <input id="feeds_multifeedlimit" type="text" name="multifeedlimit" size="3" value="{$multifeedlimit|safetext}" />
                     <em class="z-formnote">{gt text='for combined feeds (0 to add all)'}</em>
                 </div>
             </fieldset>
@@ -42,12 +42,12 @@
                 <legend>{gt text='Cache Settings'}</legend>
                 <div class="z-formrow">
                     <label for="feeds_cachedirectory">{gt text='Cache directory for feeds'}</label>
-                    <input id="feeds_cachedirectory" type="text" name="cachedirectory" size="30" value="{$cachedirectory|varprepfordisplay}" />
+                    <input id="feeds_cachedirectory" type="text" name="cachedirectory" size="30" value="{$cachedirectory|safetext}" />
                     <em class="z-formnote">{gt text='(relative to pnTemp)'}</em>
                 </div>
                 <div class="z-formrow">
                     <label for="feeds_cacheinterval">{gt text='Cache interval for feeds'}</label>
-                    <input id="feeds_cacheinterval" type="text" name="cacheinterval" size="3" value="{$cacheinterval|varprepfordisplay}" />
+                    <input id="feeds_cacheinterval" type="text" name="cacheinterval" size="3" value="{$cacheinterval|safetext}" />
                     <em class="z-formnote">{gt text='in seconds (3600 = 1 hour)'}</em>
                 </div>
             </fieldset>

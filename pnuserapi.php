@@ -62,7 +62,7 @@ function Feeds_userapi_getall($args)
 
     $orderby = null;
     if (!empty($args['order'])) {
-        $pntable = System::dbGetTables();
+        $pntable = DBUtil::getTables();
         $feedscolumn = $pntable['feeds_column'];
         $orderby = $feedscolumn[$args['order']].' DESC';
     }

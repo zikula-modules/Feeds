@@ -79,7 +79,7 @@ function Feeds_upgrade($oldversion)
             CacheUtil::createLocalDir('feeds');
 
             // migrate module vars
-            $tables = System::dbGetTables();
+            $tables = DBUtil::getTables();
             $sql    = "UPDATE $tables[module_vars] SET pn_modname = 'Feeds' WHERE pn_modname = 'RSS'";
             if (!DBUtil::executeSQL($sql)) {
                 LogUtil::registerError(__('Error! Update attempt failed.', $dom));

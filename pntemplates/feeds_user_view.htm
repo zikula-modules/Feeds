@@ -16,9 +16,9 @@
         {if $categoryname eq ''}{assign var='categoryname' value=$category.name}{/if}
 
         {if $shorturls and $shorturlstype eq 0}
-        <li><a href="{modurl modname='Feeds' func='view' prop=$property cat=$category.path|replace:$rootCat.path:''}" title="{$category.display_desc.$lang|varprepfordisplay}">{$categoryname|varprepfordisplay}</a></li>
+        <li><a href="{modurl modname='Feeds' func='view' prop=$property cat=$category.path|replace:$rootCat.path:''}" title="{$category.display_desc.$lang|safetext}">{$categoryname|safetext}</a></li>
         {else}
-        <li><a href="{modurl modname='Feeds' func='view' prop=$property cat=$category.id}" title="{$category.display_desc.$lang|varprepfordisplay}">{$categoryname|varprepfordisplay}</a></li>
+        <li><a href="{modurl modname='Feeds' func='view' prop=$property cat=$category.id}" title="{$category.display_desc.$lang|safetext}">{$categoryname|safetext}</a></li>
         {/if}
       {/foreach}
     </ul>
@@ -26,7 +26,7 @@
 {else}
     {if $enablecategorization and $category}
     <h3 class="feed-title">
-        {gt text='Category: %s' tag1=$category.display_name.$lang|varprepfordisplay}
+        {gt text='Category: %s' tag1=$category.display_name.$lang|safetext}
     </h3>
     <div class="feed-list">
         {gt text='The Feeds of this category are as follows:'}
@@ -41,7 +41,7 @@
         <ul>
     {/if}
         {section name=item loop=$items}
-            <li><a href="{modurl modname='Feeds' func='display' fid=$items[item].fid}">{$items[item].name|varprepfordisplay}</a></li>
+            <li><a href="{modurl modname='Feeds' func='display' fid=$items[item].fid}">{$items[item].name|safetext}</a></li>
         {/section}
         </ul>
     </div>

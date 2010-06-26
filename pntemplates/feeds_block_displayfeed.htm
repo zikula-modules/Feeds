@@ -7,9 +7,9 @@
         {assign var='image' value=$feed.feed->get_image_url()}
         {assign var='title' value=$feed.feed->get_image_title()}
         {if $link neq ''}
-        <a href="{$link|varprepfordisplay}"><img src="{$image}" alt="{$title|varprepfordisplay}" /></a>
+        <a href="{$link|safetext}"><img src="{$image}" alt="{$title|safetext}" /></a>
         {else}
-        <img src="{$link|varprepfordisplay}" alt="{$title|varprepfordisplay}" />
+        <img src="{$link|safetext}" alt="{$title|safetext}" />
         {/if}
     </div>
     {/if}
@@ -23,7 +23,7 @@
     {foreach from=$feeditems item='feeditem'}
         {assign var='feeditemlink' value=$feeditem->get_link()}
         {assign var='feeditemtitle' value=$feeditem->get_title()}
-            <li><a href="{$feeditemlink|varprepfordisplay}" {if $openinnewwindow eq 1}target="_blank"{/if}>{$feeditemtitle|varprepfordisplay}</a>
+            <li><a href="{$feeditemlink|safetext}" {if $openinnewwindow eq 1}target="_blank"{/if}>{$feeditemtitle|safetext}</a>
         {if $displaydescription ne 0}
             {assign var='feeditemdesc' value=$feeditem->get_description()}
             <div class="feeditem-desc">{$feeditemdesc|varprephtmldisplay}</div>

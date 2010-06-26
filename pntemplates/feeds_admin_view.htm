@@ -55,8 +55,8 @@
         <tbody>
         {section name='feedsitems' loop=$feedsitems}    
             <tr class="{cycle values='z-odd,z-even'}">
-                <td>{$feedsitems[feedsitems].name|varprepfordisplay}</td>
-                <td>{$feedsitems[feedsitems].url|varprepfordisplay}</td>
+                <td>{$feedsitems[feedsitems].name|safetext}</td>
+                <td>{$feedsitems[feedsitems].url|safetext}</td>
                 {if $enablecategorization}
                 <td>
                     {assignedcategorieslist item=$feedsitems[feedsitems]}
@@ -65,7 +65,7 @@
                 <td>
                 {assign var='options' value=$feedsitems[feedsitems].options}
                 {section name='options' loop=$options}
-                    <a href="{$options[options].url|varprepfordisplay}">{img modname='core' set='icons/extrasmall' src=$options[options].image title=$options[options].title alt=$options[options].title}</a>
+                    <a href="{$options[options].url|safetext}">{img modname='core' set='icons/extrasmall' src=$options[options].image title=$options[options].title alt=$options[options].title}</a>
                 {/section}
                 </td>
             </tr>
