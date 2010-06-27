@@ -26,9 +26,6 @@ class Feeds_User extends Zikula_Controller
         $enablecategorization = ModUtil::getVar('Feeds', 'enablecategorization');
 
         if ($enablecategorization) {
-            if (!Loader::loadClass('CategoryRegistryUtil')) {
-                z_exit(__f('Error! Unable to load class [%s]', 'CategoryRegistryUtil'));
-            }
             // get the categories registered for the Pages
             $catregistry = CategoryRegistryUtil::getRegisteredModuleCategories('Feeds', 'feeds');
             $properties  = array_keys($catregistry);
@@ -71,9 +68,6 @@ class Feeds_User extends Zikula_Controller
 
         // check if categorisation is enabled
         if ($modvars['enablecategorization']) {
-            if (!Loader::loadClass('CategoryUtil') || !Loader::loadClass('CategoryRegistryUtil')) {
-                z_exit(__f('Error! Unable to load class [%s]', 'CategoryUtil || CategoryRegistryUtil'));
-            }
             // get the categories registered for the Pages
             $catregistry = CategoryRegistryUtil::getRegisteredModuleCategories('Feeds', 'feeds');
             $props = array_keys($catregistry);
@@ -276,10 +270,6 @@ class Feeds_User extends Zikula_Controller
             // check out if the contents are cached.
             if ($this->renderer->is_cached('feeds_user_category.htm')) {
                 return $this->renderer->fetch('feeds_user_category.htm');
-            }
-
-            if (!Loader::loadClass('CategoryUtil') || !Loader::loadClass('CategoryRegistryUtil')) {
-                z_exit(__f('Error! Unable to load class [%s]', 'CategoryUtil || CategoryRegistryUtil'));
             }
 
             // get the categories registered for the Pages

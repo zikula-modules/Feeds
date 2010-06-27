@@ -41,10 +41,6 @@ class Feeds_Admin extends Zikula_Controller
             return LogUtil::registerPermissionError();
         }
 
-        // load the categories system
-        if (!Loader::loadClass('CategoryRegistryUtil')) {
-            z_exit(__f('Error! Unable to load class [%s]', 'CategoryRegistryUtil'));
-        }
         $categories = CategoryRegistryUtil::getRegisteredModuleCategories('Feeds', 'feeds');
 
         // Create output object
@@ -112,10 +108,6 @@ class Feeds_Admin extends Zikula_Controller
             return LogUtil::registerPermissionError();
         }
 
-        // load the categories system
-        if (!Loader::loadClass('CategoryRegistryUtil')) {
-            z_exit(__f('Error! Unable to load class [%s]', 'CategoryRegistryUtil'));
-        }
         $categories = CategoryRegistryUtil::getRegisteredModuleCategories('Feeds', 'feeds');
 
         // Create output object
@@ -252,9 +244,6 @@ class Feeds_Admin extends Zikula_Controller
         if ($modvars['enablecategorization'])
         {
             // load the category registry util
-            if (!Loader::loadClass('CategoryRegistryUtil')) {
-                z_exit(__f('Error! Unable to load class [%s]', 'CategoryRegistryUtil'));
-            }
             $catregistry  = CategoryRegistryUtil::getRegisteredModuleCategories('Feeds', 'feeds');
             $properties = array_keys($catregistry);
 
