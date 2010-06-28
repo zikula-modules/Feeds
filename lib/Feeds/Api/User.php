@@ -41,8 +41,6 @@ class Feeds_Api_User extends Zikula_Api
             return $items;
         }
 
-        $dom = ZLanguage::getModuleDomain('Feeds');
-
         $args['catFilter'] = array();
         if (isset($args['category']) && !empty($args['category'])){
             if (is_array($args['category'])) {
@@ -64,8 +62,8 @@ class Feeds_Api_User extends Zikula_Api
 
         $orderby = null;
         if (!empty($args['order'])) {
-            $pntable = DBUtil::getTables();
-            $feedscolumn = $pntable['feeds_column'];
+            $dbtable = DBUtil::getTables();
+            $feedscolumn = $dbtable['feeds_column'];
             $orderby = $feedscolumn[$args['order']].' DESC';
         }
 
@@ -73,15 +71,12 @@ class Feeds_Api_User extends Zikula_Api
         $objArray = DBUtil::selectObjectArray('feeds', '', 'fid', $args['startnum']-1, $args['numitems'], '', $permFilter, $args['catFilter']);
 
         if ($objArray === false) {
-            return LogUtil::registerError(__('Error! Could not load any Feed.', $dom));
+            return LogUtil::registerError(__('Error! Could not load any Feed.'));
         }
 
         // need to do this here as the category expansion code can't know the
         // root category which we need to build the relative path component
         if ($objArray && isset($args['catregistry']) && $args['catregistry']) {
-            if (!Loader::loadClass('CategoryUtil')) {
-                z_exit(__f('Error! Unable to load class [%s]', 'CategoryUtil'));
-            }
             ObjectUtil::postProcessExpandedObjectArrayCategories($objArray, $args['catregistry']);
         }
 

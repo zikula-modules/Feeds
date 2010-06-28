@@ -17,31 +17,27 @@
 function Feeds_tables()
 {
     // Initialise table array
-    $pntable = array();
+    $dbtable = array();
 
     // Full table definition
-    $pntable['feeds'] = DBUtil::getLimitedTablename('feeds');
-    $pntable['feeds_column'] = array('fid'       => 'pn_fid',
+    $dbtable['feeds'] = DBUtil::getLimitedTablename('feeds');
+    $dbtable['feeds_column'] = array('fid'       => 'pn_fid',
                                      'name'      => 'pn_name',
                                      'urltitle'  => 'pn_urltitle',
                                      'url'       => 'pn_url');
-    $pntable['feeds_column_def'] = array('fid'      => 'I(10) NOTNULL AUTOINCREMENT PRIMARY',
+    $dbtable['feeds_column_def'] = array('fid'      => 'I(10) NOTNULL AUTOINCREMENT PRIMARY',
                                          'name'     => "C(255) NOTNULL DEFAULT ''",
                                          'urltitle' => "C(255) NOTNULL DEFAULT ''",
                                          'url'      => "C(255) NOTNULL DEFAULT ''");
 
     // Enable categorization services
-    $pntable['feeds_db_extra_enable_categorization'] = ModUtil::getVar('Feeds', 'enablecategorization');
-    $pntable['feeds_primary_key_column'] = 'fid';
+    $dbtable['feeds_db_extra_enable_categorization'] = ModUtil::getVar('Feeds', 'enablecategorization');
+    $dbtable['feeds_primary_key_column'] = 'fid';
 
     // add standard data fields
-    ObjectUtil::addStandardFieldsToTableDefinition($pntable['feeds_column'], 'pn_');
-    ObjectUtil::addStandardFieldsToTableDataDefinition($pntable['feeds_column_def']);
-
-    // old table names for upgrade
-    $pntable['RSS'] = DBUtil::getLimitedTablename('RSS');
-    $pntable['rss'] = DBUtil::getLimitedTablename('rss');
+    ObjectUtil::addStandardFieldsToTableDefinition($dbtable['feeds_column'], 'pn_');
+    ObjectUtil::addStandardFieldsToTableDataDefinition($dbtable['feeds_column_def']);
 
     // Return the table information
-    return $pntable;
+    return $dbtable;
 }

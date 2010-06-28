@@ -10,7 +10,7 @@
  * @subpackage Feeds
  */
 
-class Feeds_Displayfeed extends Zikula_Block
+class Feeds_Block_Displayfeed extends Zikula_Block
 {
     /**
      * initialise block
@@ -125,6 +125,7 @@ class Feeds_Displayfeed extends Zikula_Block
 
         // The API function is called.  The arguments to the function are passed in
         // as their own arguments array
+        //ModUtil::dbInfoLoad('Feeds');
         $items = ModUtil::apiFunc('Feeds', 'user', 'getall');
 
         // create an array for feednames and id's for the template
