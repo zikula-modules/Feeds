@@ -14,7 +14,7 @@ $modversion['displayname']    = __('Feeds', $dom);
 $modversion['oldnames']       = array('RSS');
 $modversion['description']    = __('The Feeds module provides a feed reader to your website.', $dom);
 $modversion['url']            = __(/*!module name that appears in URL*/'feeds', $dom);
-$modversion['version']        = '2.5';
+$modversion['version']        = '2.6';
 
 $modversion['credits']        = 'pndocs/credits.txt';
 $modversion['help']           = 'pndocs/help.txt';
