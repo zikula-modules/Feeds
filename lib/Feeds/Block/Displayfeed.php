@@ -71,8 +71,8 @@ class Feeds_Block_Displayfeed extends Zikula_Block
         }
 
         //  Check if the block is cached
-        if ($this->renderer->is_cached('feeds_block_displayfeed.htm', $item['fid'])) {
-            $blockinfo['content'] = $this->renderer->fetch('feeds_block_displayfeed.htm', $item['fid']);
+        if ($this->view->is_cached('feeds_block_displayfeed.htm', $item['fid'])) {
+            $blockinfo['content'] = $this->view->fetch('feeds_block_displayfeed.htm', $item['fid']);
             return BlockUtil::themeBlock($blockinfo);
         }
 
@@ -80,17 +80,17 @@ class Feeds_Block_Displayfeed extends Zikula_Block
         $fullfeed = ModUtil::apiFunc('Feeds', 'user', 'getfeed', array('furl' => $item['url']));
 
         // Assign the module vars
-        $this->renderer->assign(ModUtil::getVar('Feeds'));
+        $this->view->assign(ModUtil::getVar('Feeds'));
 
         // Assign the item and feed
-        $this->renderer->assign($item);
-        $this->renderer->assign('feed', $fullfeed);
+        $this->view->assign($item);
+        $this->view->assign('feed', $fullfeed);
 
         // assign the block vars
-        $this->renderer->assign($vars);
+        $this->view->assign($vars);
 
         // Populate block info and pass to theme
-        $blockinfo['content'] = $this->renderer->fetch('feeds_block_displayfeed.htm', $item['fid']);
+        $blockinfo['content'] = $this->view->fetch('feeds_block_displayfeed.htm', $item['fid']);
 
         return BlockUtil::themeBlock($blockinfo);
     }
@@ -101,7 +101,7 @@ class Feeds_Block_Displayfeed extends Zikula_Block
     public function modify($blockinfo)
     {
         // Create output object
-        $this->renderer->setCaching(false);
+        $this->view->setCaching(false);
 
         // Get current content
         $vars = BlockUtil::varsFromContent($blockinfo['content']);
@@ -133,13 +133,13 @@ class Feeds_Block_Displayfeed extends Zikula_Block
         foreach ($items as $item) {
             $allfeeds[$item['fid']] = $item['name'];
         }
-        $this->renderer->assign('allfeeds', $allfeeds);
+        $this->view->assign('allfeeds', $allfeeds);
 
         // assign the block vars
-        $this->renderer->assign($vars);
+        $this->view->assign($vars);
 
         // Return output
-        return $this->renderer->fetch('feeds_block_displayfeed_modify.htm');
+        return $this->view->fetch('feeds_block_displayfeed_modify.htm');
     }
 
     /**
