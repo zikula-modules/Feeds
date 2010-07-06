@@ -187,7 +187,7 @@ class Feeds_Installer extends Zikula_Installer
         $rootcat = CategoryUtil::getCategoryByPath($regpath);
         if ($rootcat) {
             // create an entry in the categories registry
-            $registry = new Categories_DBObject_CategoryRegistry();
+            $registry = new Categories_DBObject_Registry();
             $registry->setDataField('modname', 'Feeds');
             $registry->setDataField('table', 'feeds');
             $registry->setDataField('property', 'Main');
