@@ -26,7 +26,7 @@
             <li><a href="{$feeditemlink|safetext}" {if $openinnewwindow eq 1}target="_blank"{/if}>{$feeditemtitle|safetext}</a>
         {if $displaydescription ne 0}
             {assign var='feeditemdesc' value=$feeditem->get_description()}
-            <div class="feeditem-desc">{$feeditemdesc|varprephtmldisplay}</div>
+            <div class="feeditem-desc">{$feeditemdesc|safehtml}</div>
         {/if}
             </li>
     {/foreach}

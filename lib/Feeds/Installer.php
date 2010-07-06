@@ -171,7 +171,7 @@ class Feeds_Installer extends Zikula_Installer
 
         if (!$fCat) {
             // create placeholder for all the module categories
-            $cat = new PNCategory();
+            $cat = new Categories_DBObject_Category();
             $cat->setDataField('parent_id', $rootcat['id']);
             $cat->setDataField('name', 'Feeds');
             $cat->setDataField('display_name', array($lang => __('Feeds', $dom)));
@@ -187,7 +187,7 @@ class Feeds_Installer extends Zikula_Installer
         $rootcat = CategoryUtil::getCategoryByPath($regpath);
         if ($rootcat) {
             // create an entry in the categories registry
-            $registry = new PNCategoryRegistry();
+            $registry = new Categories_DBObject_CategoryRegistry();
             $registry->setDataField('modname', 'Feeds');
             $registry->setDataField('table', 'feeds');
             $registry->setDataField('property', 'Main');

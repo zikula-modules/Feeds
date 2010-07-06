@@ -29,7 +29,7 @@ class Feeds_Api_Search extends Zikula_Api
         if (SecurityUtil::checkPermission('Feeds::', '::', ACCESS_READ)) {
             // Create output object - this object will store all of our output so that
             // we can return it easily when required
-            $render = Renderer::getInstance('Feeds');
+            $render = Zikula_View::getInstance('Feeds');
             $render->assign('active', (isset($args['active']) && isset($args['active']['Feeds'])) || (!isset($args['active'])));
             return $render->fetch('feeds_search_options.htm');
         }

@@ -50,10 +50,10 @@
                 <ul>
                     {usergetvar name='uname' uid=$cr_uid assign='username'}
                     <li>{gt text='Created by %s' tag1=$username}</li>
-                    <li>{gt text='Created on %s' tag1=$cr_date|date_format}</li>
+                    <li>{gt text='Created on %s' tag1=$cr_date|dateformat}</li>
                     {usergetvar name='uname' uid=$lu_uid assign='username'}
                     <li>{gt text='Last update by %s' tag1=$username}</li>
-                    <li>{gt text='Updated on %s' tag1=$lu_date|date_format}</li>
+                    <li>{gt text='Updated on %s' tag1=$lu_date|dateformat}</li>
                 </ul>
             </fieldset>
 

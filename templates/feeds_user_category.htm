@@ -33,7 +33,7 @@
                 <a href="{$feeditemlink|safetext}" {if $openinnewwindow eq 1}target="_blank"{/if}>{$feeditemtitle|safetext}</a>
             </div>
             <div class="feeditem-info">
-                {$feeditemdate|date_format:'%I:%M %p %A, %B %e, %Y'}
+                {$feeditemdate|dateformat:'%I:%M %p %A, %B %e, %Y'}
                 &nbsp;-&nbsp;
                 <a href="{modurl modname='Feeds' func='display' fid=$FeedLinkInfo.fid}" title="{$FeedLinkInfo.name|safetext}">{$FeedLinkInfo.name|safetext}</a>
                 &nbsp;
@@ -43,7 +43,7 @@
             </div>
             <div class="feeditem-text">
                 {if $feeditemdescription neq ''}
-                    <p>{$feeditemdescription|varprephtmldisplay}</p>
+                    <p>{$feeditemdescription|safehtml}</p>
                     <div class="feeditem-more">
                         <a href="{$feeditemlink|safetext}" {if $openinnewwindow eq 1}target="_blank"{/if}>{gt text='Read more'}</a>
                     </div>
