@@ -10,7 +10,7 @@
  * @subpackage Feeds
  */
 
-class Feeds_Block_Displayfeed extends Zikula_Block
+class Feeds_Block_Displayfeed extends Zikula_Controller_Block
 {
     /**
      * initialise block
