@@ -10,7 +10,7 @@
  * @subpackage News
  */
 
-class Feeds_Api_Search extends Zikula_Api
+class Feeds_Api_Search extends Zikula_AbstractApi
 {
     /**
      * Search plugin info
@@ -56,7 +56,7 @@ class Feeds_Api_Search extends Zikula_Api
         $sessionId = session_id();
 
         $sql = "
-SELECT 
+SELECT
                 $feedscolumn[name] as title,
    '' as text,
                 $feedscolumn[fid] as id,

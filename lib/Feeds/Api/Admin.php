@@ -10,7 +10,7 @@
  * @subpackage Feeds
  */
 
-class Feeds_Api_Admin extends Zikula_Api
+class Feeds_Api_Admin extends Zikula_AbstractApi
 {
     /**
      * create a new RSS item

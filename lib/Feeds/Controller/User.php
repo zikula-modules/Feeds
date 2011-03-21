@@ -11,7 +11,7 @@
  */
 
 
-class Feeds_Controller_User extends Zikula_Controller
+class Feeds_Controller_User extends Zikula_AbstractController
 {
     /**
      * the main user function

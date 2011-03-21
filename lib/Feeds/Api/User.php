@@ -10,7 +10,7 @@
  * @subpackage Feeds
  */
 
-class Feeds_Api_User extends Zikula_Api
+class Feeds_Api_User extends Zikula_AbstractApi
 {
     /**
      * get all feeds feeds

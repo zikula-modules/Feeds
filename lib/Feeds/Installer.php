@@ -9,7 +9,7 @@
  * @package Zikula_Value_Addons
  * @subpackage Feeds
  */
-class Feeds_Installer extends Zikula_Installer
+class Feeds_Installer extends Zikula_AbstractInstaller
 {
     /**
      * initialise the Feeds module

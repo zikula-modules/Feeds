@@ -10,7 +10,7 @@
  * @subpackage Feeds
  */
 
-class Feeds_Controller_Admin extends Zikula_Controller
+class Feeds_Controller_Admin extends Zikula_AbstractController
 {
     /**
      * the main administration function
