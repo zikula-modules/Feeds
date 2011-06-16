@@ -3,11 +3,7 @@
  * Zikula Application Framework
  *
  * @copyright (c) 2002, Zikula Development Team
- * @link http://www.zikula.org
- * @version $Id: pninit.php 391 2009-12-20 09:54:51Z mateo $
  * @license GNU/GPL - http://www.gnu.org/copyleft/gpl.html
- * @package Zikula_Value_Addons
- * @subpackage Feeds
  */
 class Feeds_Installer extends Zikula_AbstractInstaller
 {

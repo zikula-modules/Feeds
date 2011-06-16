@@ -3,7 +3,6 @@
  * Feeds
  *
  * @copyright (c) 2002, Zikula Development Team
- * @link      http://code.zikula.org/feeds/
  * @license   GNU/GPL - http://www.gnu.org/copyleft/gpl.html
  */
 

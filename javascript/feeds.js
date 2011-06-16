@@ -1,7 +1,3 @@
-/*
- *  $Id: feeds.js 334 2009-11-09 05:51:54Z drak $ 
- */
- 
 /**
  * create the onload function to enable the respective functions
  *

@@ -3,11 +3,8 @@
  * Zikula Application Framework
  *
  * @copyright (c) 2002, Zikula Development Team
- * @link http://www.zikula.org
- * @version $Id: displayfeed.php 334 2009-11-09 05:51:54Z drak $
  * @license GNU/GPL - http://www.gnu.org/copyleft/gpl.html
- * @package Zikula_Value_Addons
- * @subpackage Feeds
+
  */
 
 class Feeds_Block_Displayfeed extends Zikula_Controller_AbstractBlock

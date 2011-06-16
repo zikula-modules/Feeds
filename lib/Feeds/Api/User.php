@@ -3,11 +3,7 @@
  * Zikula Application Framework
  *
  * @copyright (c) 2002, Zikula Development Team
- * @link http://www.zikula.org
- * @version $Id: pnuserapi.php 402 2010-01-05 07:25:40Z herr.vorragend $
  * @license GNU/GPL - http://www.gnu.org/copyleft/gpl.html
- * @package Zikula_Value_Addons
- * @subpackage Feeds
  */
 
 class Feeds_Api_User extends Zikula_AbstractApi
