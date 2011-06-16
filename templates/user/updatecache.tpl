@@ -1,1 +1,0 @@
-{gt text='Cache Updated'}
