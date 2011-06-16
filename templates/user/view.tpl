@@ -1,6 +1,6 @@
 {sitename assign='sitename'}
 
-{include file='feeds_user_menu.htm'}
+{insert name='getstatusmsg'}
 
 {if $action eq 'subcatslist'}
     <h3 class="feed-title">
@@ -14,23 +14,23 @@
         {array_field_isset assign='categoryname' array=$category.display_name field=$lang returnValue=1}
         {if $categoryname eq ''}{assign var='categoryname' value=$category.name}{/if}
 
-        {if $shorturls and $shorturlstype eq 0}
-        <li><a href="{modurl modname='Feeds' func='view' prop=$property cat=$category.path|replace:$rootCat.path:''}" title="{$category.display_desc.$lang|safetext}">{$categoryname|safetext}</a></li>
+        {if $modvars.ZConfig.shorturls}
+        <li><a href="{modurl modname='Feeds' type='user' func='view' prop=$property cat=$category.path|replace:$rootCat.path:''}" title="{$category.display_desc.$lang|safetext}">{$categoryname|safetext}</a></li>
         {else}
-        <li><a href="{modurl modname='Feeds' func='view' prop=$property cat=$category.id}" title="{$category.display_desc.$lang|safetext}">{$categoryname|safetext}</a></li>
+        <li><a href="{modurl modname='Feeds' type='user' func='view' prop=$property cat=$category.id}" title="{$category.display_desc.$lang|safetext}">{$categoryname|safetext}</a></li>
         {/if}
       {/foreach}
     </ul>
     </div>
 {else}
-    {if $enablecategorization and $category}
+    {if $modvars.Feeds.enablecategorization and $category}
     <h3 class="feed-title">
         {gt text='Category: %s' tag1=$category.display_name.$lang|safetext}
     </h3>
     <div class="feed-list">
         {gt text='The Feeds of this category are as follows:'}
         <ul>
-            <li><a href="{modurl modname='Feeds' func='category' cat=$category.id}">{gt text='View all feeds'}</a></li>
+            <li><a href="{modurl modname='Feeds' type='user' func='category' cat=$category.id}">{gt text='View all feeds'}</a></li>
     {else}
     <h3 class="feed-title">
         {gt text='Feeds list'}
@@ -40,7 +40,7 @@
         <ul>
     {/if}
         {section name=item loop=$items}
-            <li><a href="{modurl modname='Feeds' func='display' fid=$items[item].fid}">{$items[item].name|safetext}</a></li>
+            <li><a href="{modurl modname='Feeds' type='user' func='display' fid=$items[item].fid}">{$items[item].name|safetext}</a></li>
         {/section}
         </ul>
     </div>

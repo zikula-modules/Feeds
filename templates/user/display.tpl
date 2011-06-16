@@ -1,6 +1,6 @@
-{include file='feeds_user_menu.htm'}
+{insert name='getstatusmsg'}
 
-{assign var=link value=$feed->get_image_link()}
+{assign var='link' value=$feed->get_image_link()}
 {if $link neq ''}
 <div class="feed-image">
     {assign var='image' value=$feed->get_image_url()}
@@ -17,7 +17,7 @@
 </h3>
 <div class="feed-list">
     <p>{gt text='URL'} : {$item.url}</p>
-    {assign var='feeditems' value=$feed->get_items($feedstartnum, $itemsperpage)}
+    {assign var='feeditems' value=$feed->get_items($feedstartnum, $modvars.Feeds.itemsperpage)}
     {foreach from=$feeditems item='feeditem'}
     <div class="feeditem">
         {assign var='feeditemlink' value=$feeditem->get_link()}
@@ -29,7 +29,7 @@
             {assign var='feeditemauthor' value=$feeditemauthorid->get_name()}
         {/if}
         <h4 class="feeditem-title">
-            <a href="{$feeditemlink|safetext}" {if $openinnewwindow eq 1}target="_blank"{/if}>{$feeditemtitle|safetext}</a>
+            <a href="{$feeditemlink|safetext}" {if $modvars.Feeds.openinnewwindow eq 1}target="_blank"{/if}>{$feeditemtitle|safetext}</a>
         </h4>
         <span class="feeditem-info" >
             {$feeditemdate|dateformat:'%I:%M %p %A, %B %e, %Y'}
@@ -41,7 +41,7 @@
         {if $feeditemdescription neq ''}
         <p class="feeditem-text">{$feeditemdescription|safehtml}</p>
         <span class="feeditem-more">
-            <a href="{$feeditemlink|safetext}" {if $openinnewwindow eq 1}target="_blank"{/if}>{gt text='Read more'}</a>
+            <a href="{$feeditemlink|safetext}" {if $modvars.Feeds.openinnewwindow eq 1}target="_blank"{/if}>{gt text='Read more'}</a>
         </span>
         {/if}
     </div>
@@ -49,6 +49,6 @@
 </div>
 <div class="feed-bottom" >
     {pager show='page' rowcount=$pager.numitems limit=$pager.itemsperpage posvar='startnum' shift=1}
-    {modurl modname='Feeds' func='display' fid=$item.fid assign='returnurl'}
-    {modcallhooks hookobject='item' hookaction='display' hookid=$item.fid module='Feeds' returnurl=$returnurl}
+    {modurl modname='Feeds' type='user' func='display' fid=$item.fid assign='returnurl'}
+    {* modcallhooks hookobject='item' hookaction='display' hookid=$item.fid module='Feeds' returnurl=$returnurl *}
 </div>
