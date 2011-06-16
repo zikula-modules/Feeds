@@ -1,7 +1,4 @@
-{*  $Id: feeds_user_category.htm 407 2010-04-20 10:21:04Z herr.vorragend $  *}
-
-{include file='feeds_user_menu.htm'}
-
+{insert name='getstatusmsg'}
 {if $enablecategorization}
     {assign var='categoryname' value=$category.display_name.$lang}
     {if $categoryname eq ''}{assign var='categoryname' value=$category.name}{/if}

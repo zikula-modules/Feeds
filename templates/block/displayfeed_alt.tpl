@@ -1,5 +1,3 @@
-{*  $Id: feeds_block_displayfeed_alt.htm 407 2010-04-20 10:21:04Z herr.vorragend $  *}
-
 {assign var='feeditems' value=$feed.feed->get_items(0, $numitems)}
 
 {foreach from=$feeditems item='feeditem' name='feeditems'}

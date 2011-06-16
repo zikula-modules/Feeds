@@ -1,4 +1,3 @@
-{*  $Id: feeds_user_main.htm 334 2009-11-09 05:51:54Z drak $  *}
 {if $enablecategorization and $properties}
     {modfunc modname='Feeds' func='view' prop=$properties.0}
 {else} 

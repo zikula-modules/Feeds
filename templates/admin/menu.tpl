@@ -1,4 +1,3 @@
-{*  $Id: feeds_admin_menu.htm 334 2009-11-09 05:51:54Z drak $  *}
 {admincategorymenu}
 
 <div class="z-adminbox">

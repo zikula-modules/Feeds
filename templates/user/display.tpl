@@ -1,5 +1,3 @@
-{*  $Id: feeds_user_display.htm 407 2010-04-20 10:21:04Z herr.vorragend $  *}
-
 {include file='feeds_user_menu.htm'}
 
 {assign var=link value=$feed->get_image_link()}

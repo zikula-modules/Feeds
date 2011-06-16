@@ -1,4 +1,3 @@
-{*  $Id: feeds_user_view.htm 407 2010-04-20 10:21:04Z herr.vorragend $  *}
 {sitename assign='sitename'}
 
 {include file='feeds_user_menu.htm'}

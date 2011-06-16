@@ -1,5 +1,3 @@
-{*  $Id: feeds_block_displayfeed_modify.htm 334 2009-11-09 05:51:54Z drak $  *}
-
 <div class="z-formrow">
     <label for="feeds_feedid">{gt text='Feed' domain='module_feeds'}</label>
     <select id="feeds_feedid" name="feedid">

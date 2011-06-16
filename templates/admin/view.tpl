@@ -1,8 +1,7 @@
-{*  $Id: feeds_admin_view.htm 334 2009-11-09 05:51:54Z drak $  *}
 {ajaxheader modname='Feeds' filename='feeds.js' nobehaviour=true noscriptaculous=true}
 {gt text='View Feeds' assign='templatetitle'}
 
-{include file='feeds_admin_menu.htm'}
+{include file='admin/menu.htm'}
 
 <div class="z-admincontainer">
     <div class="z-adminpageicon">{img modname='core' src='windowlist.gif' set='icons/large' alt=$templatetitle}</div>
