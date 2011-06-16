@@ -23,10 +23,7 @@ class Feeds_Controller_Admin extends Zikula_AbstractController
      */
     public function newfeed()
     {
-        // Security check
-        if (!SecurityUtil::checkPermission('Feeds::Item', '::', ACCESS_ADD)) {
-            return LogUtil::registerPermissionError();
-        }
+        $this->throwForbiddenUnless(SecurityUtil::checkPermission('Feeds::Item', '::', ACCESS_ADD), LogUtil::getErrorMsgPermission());
 
         $categories = CategoryRegistryUtil::getRegisteredModuleCategories('Feeds', 'feeds');
 
@@ -87,10 +84,7 @@ class Feeds_Controller_Admin extends Zikula_AbstractController
             return LogUtil::registerError($this->__('No such Feed found.'), 404);
         }
 
-        // security check
-        if (!SecurityUtil::checkPermission('Feeds::Item', "$item[name]::$fid", ACCESS_EDIT)) {
-            return LogUtil::registerPermissionError();
-        }
+        $this->throwForbiddenUnless(SecurityUtil::checkPermission('Feeds::Item', "$item[name]::$fid", ACCESS_EDIT), LogUtil::getErrorMsgPermission());
 
         $categories = CategoryRegistryUtil::getRegisteredModuleCategories('Feeds', 'feeds');
 
@@ -154,10 +148,7 @@ class Feeds_Controller_Admin extends Zikula_AbstractController
             return LogUtil::registerError($this->__('No such Feed found.'), 404);
         }
 
-        // Security check
-        if (!SecurityUtil::checkPermission('Feeds::Item', "$item[name]::$fid", ACCESS_DELETE)) {
-            return LogUtil::registerPermissionError();
-        }
+        $this->throwForbiddenUnless(SecurityUtil::checkPermission('Feeds::Item', "$item[name]::$fid", ACCESS_DELETE), LogUtil::getErrorMsgPermission());
 
         // Check for confirmation.
         if (empty($confirmation)) {
@@ -192,10 +183,7 @@ class Feeds_Controller_Admin extends Zikula_AbstractController
      */
     public function view($args)
     {
-        // Security check
-        if (!SecurityUtil::checkPermission( 'Feeds::', '::', ACCESS_EDIT)) {
-            return LogUtil::registerPermissionError();
-        }
+        $this->throwForbiddenUnless(SecurityUtil::checkPermission('Feeds::', "::", ACCESS_EDIT), LogUtil::getErrorMsgPermission());
 
         $startnum = FormUtil::getPassedValue('startnum', isset($args['startnum']) ? $args['startnum'] : null, 'GET');
         $property = FormUtil::getPassedValue('feeds_property', isset($args['feeds_property']) ? $args['feeds_property'] : null, 'POST');
@@ -303,10 +291,7 @@ class Feeds_Controller_Admin extends Zikula_AbstractController
      */
     public function modifyconfig()
     {
-        // Security check
-        if (!SecurityUtil::checkPermission('Feeds::', '::', ACCESS_ADMIN)) {
-            return LogUtil::registerPermissionError();
-        }
+        $this->throwForbiddenUnless(SecurityUtil::checkPermission('Feeds::', "::", ACCESS_ADMIN), LogUtil::getErrorMsgPermission());
 
         // Assign all module vars
         $this->view->assign($this->getVars());
@@ -321,10 +306,7 @@ class Feeds_Controller_Admin extends Zikula_AbstractController
      */
     public function updateconfig()
     {
-        // security check
-        if (!SecurityUtil::checkPermission('Feeds::', '::', ACCESS_ADMIN)) {
-            return LogUtil::registerPermissionError();
-        }
+        $this->throwForbiddenUnless(SecurityUtil::checkPermission('Feeds::', "::", ACCESS_ADMIN), LogUtil::getErrorMsgPermission());
 
         // confirm authorisation code
         if (!SecurityUtil::confirmAuthKey()) {

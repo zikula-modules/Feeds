@@ -24,10 +24,7 @@ class Feeds_Controller_User extends Zikula_AbstractController
      */
     function view($args)
     {
-        // Security check
-        if (!SecurityUtil::checkPermission('Feeds::', '::', ACCESS_OVERVIEW)) {
-            return LogUtil::registerPermissionError();
-        }
+        $this->throwForbiddenUnless(SecurityUtil::checkPermission('Feeds::', "::", ACCESS_OVERVIEW), LogUtil::getErrorMsgPermission());
 
         // Get parameters from whatever input we need.
         $startnum = (int)FormUtil::getPassedValue('startnum', isset($args['startnum']) ? $args['startnum'] : 1, 'GET');
@@ -207,10 +204,7 @@ class Feeds_Controller_User extends Zikula_AbstractController
      */
     function category($args)
     {
-        // Security check
-        if (!SecurityUtil::checkPermission('Feeds::', '::', ACCESS_OVERVIEW)) {
-            return LogUtil::registerPermissionError();
-        }
+        $this->throwForbiddenUnless(SecurityUtil::checkPermission('Feeds::', "::", ACCESS_OVERVIEW), LogUtil::getErrorMsgPermission());
 
         $cat = FormUtil::getPassedValue('cat', isset($args['cat']) ? $args['cat'] : null, 'GET');
         $startnum = (int)FormUtil::getPassedValue('startnum', isset($args['startnum']) ? $args['startnum'] : 1, 'GET');
