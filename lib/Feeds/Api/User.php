@@ -172,8 +172,9 @@ class Feeds_Api_User extends Zikula_AbstractApi
         }
 
         // Now setup SimplePie for the feed
-        $theFeed = new ZFeed($url);
-        $theFeed->set_cache_location(CacheUtil::getLocalDir() . '/' . DataUtil::formatForOS($modvars['cachedirectory']) . '/');
+        $theFeed = new SimplePieFeed();
+        $theFeed->set_feed_url($url);
+        $theFeed->set_cache_location(CacheUtil::getLocalDir($modvars['cachedirectory']));
         $theFeed->enable_order_by_date(true);
 
         // Get the charset used for the output, and tell SimplePie about it so it will try to use the same for its output

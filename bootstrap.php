@@ -12,6 +12,6 @@
  * information regarding copyright and licensing.
  */
 
-if (!PluginUtil::isAvailable('systemplugin.zfeed')) {
-    throw new Exception(__('Fatal error: ZFeed system plugin is not available'));
+if (!PluginUtil::isAvailable('systemplugin.simplepie')) {
+    throw new Exception(__('Fatal error: SimplePie system plugin is not available'));
 }
