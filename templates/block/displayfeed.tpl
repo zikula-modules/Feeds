@@ -14,7 +14,7 @@
 {/if}
 
 {if $alternatelayout eq 1}
-    {include file='feeds_block_displayfeed_alt.htm'}
+    {include file='block/displayfeed_alt.tpl'}
 {else}
     <ul class="feed-list">
     {assign var='feeditems' value=$feed.feed->get_items(0, $numitems)}

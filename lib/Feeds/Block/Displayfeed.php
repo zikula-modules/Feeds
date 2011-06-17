@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Zikula Application Framework
  *
@@ -6,9 +7,9 @@
  * @license GNU/GPL - http://www.gnu.org/copyleft/gpl.html
 
  */
-
 class Feeds_Block_Displayfeed extends Zikula_Controller_AbstractBlock
 {
+
     /**
      * initialise block
      */
@@ -24,13 +25,13 @@ class Feeds_Block_Displayfeed extends Zikula_Controller_AbstractBlock
     public function info()
     {
         return array('module' => 'Feeds',
-                'text_type' => $this->__('Display feed'),
-                'text_type_long' => $this->__('Show a feed item'),
-                'allow_multiple' => true,
-                'form_content' => false,
-                'form_refresh' => false,
-                'show_preview' => true,
-                'admin_tableless' => true);
+            'text_type' => $this->__('Display feed'),
+            'text_type_long' => $this->__('Show a feed item'),
+            'allow_multiple' => true,
+            'form_content' => false,
+            'form_refresh' => false,
+            'show_preview' => true,
+            'admin_tableless' => true);
     }
 
     /**
@@ -68,16 +69,13 @@ class Feeds_Block_Displayfeed extends Zikula_Controller_AbstractBlock
         }
 
         //  Check if the block is cached
-        if ($this->view->is_cached('feeds_block_displayfeed.htm', $item['fid'])) {
-            $blockinfo['content'] = $this->view->fetch('feeds_block_displayfeed.htm', $item['fid']);
+        if ($this->view->is_cached('block/displayfeed.tpl', $item['fid'])) {
+            $blockinfo['content'] = $this->view->fetch('block/displayfeed.tpl', $item['fid']);
             return BlockUtil::themeBlock($blockinfo);
         }
 
         // Get the feed source
         $fullfeed = ModUtil::apiFunc('Feeds', 'user', 'getfeed', array('furl' => $item['url']));
-
-        // Assign the module vars
-        $this->view->assign(ModUtil::getVar('Feeds'));
 
         // Assign the item and feed
         $this->view->assign($item);
@@ -87,7 +85,7 @@ class Feeds_Block_Displayfeed extends Zikula_Controller_AbstractBlock
         $this->view->assign($vars);
 
         // Populate block info and pass to theme
-        $blockinfo['content'] = $this->view->fetch('feeds_block_displayfeed.htm', $item['fid']);
+        $blockinfo['content'] = $this->view->fetch('block/displayfeed.tpl', $item['fid']);
 
         return BlockUtil::themeBlock($blockinfo);
     }
@@ -122,7 +120,6 @@ class Feeds_Block_Displayfeed extends Zikula_Controller_AbstractBlock
 
         // The API function is called.  The arguments to the function are passed in
         // as their own arguments array
-        //ModUtil::dbInfoLoad('Feeds');
         $items = ModUtil::apiFunc('Feeds', 'user', 'getall');
 
         // create an array for feednames and id's for the template
@@ -155,4 +152,5 @@ class Feeds_Block_Displayfeed extends Zikula_Controller_AbstractBlock
 
         return $blockinfo;
     }
+
 }
