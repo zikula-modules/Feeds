@@ -3,7 +3,7 @@
 {include file='admin/menu.tpl'}
 
 <div class="z-admincontainer">
-    <div class="z-adminpageicon">{img modname='core' src='editdelete.gif' set='icons/large' alt=$templatetitle}</div>
+    <div class="z-adminpageicon">{img modname='core' src='editdelete.png' set='icons/large' alt=$templatetitle}</div>
     <h2>{$templatetitle}</h2>
     <p class="z-warningmsg">{gt text='Do you really want to delete this Feed?'}</p>
 

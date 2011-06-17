@@ -234,12 +234,12 @@ class Feeds_Controller_Admin extends Zikula_AbstractController
 
                 if (SecurityUtil::checkPermission('Feeds::', "$item[name]::$item[fid]", ACCESS_EDIT)) {
                     $options[] = array('url' => ModUtil::url('Feeds', 'admin', 'modify', array('fid' => $item['fid'])),
-                        'image' => 'xedit.gif',
+                        'image' => 'xedit.png',
                         'title' => $this->__('Edit'));
 
                     if (SecurityUtil::checkPermission('Feeds::', "$item[name]::$item[fid]", ACCESS_DELETE)) {
                         $options[] = array('url' => ModUtil::url('Feeds', 'admin', 'delete', array('fid' => $item['fid'])),
-                            'image' => '14_layer_deletelayer.gif',
+                            'image' => '14_layer_deletelayer.png',
                             'title' => $this->__('Delete'));
                     }
                 }

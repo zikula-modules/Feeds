@@ -1,7 +1,7 @@
 {include file='admin/menu.tpl'}
 
 <div class="z-admincontainer">
-    <div class="z-adminpageicon">{img modname='core' src='configure.gif' set='icons/large' __alt='Settings'}</div>
+    <div class="z-adminpageicon">{img modname='core' src='configure.png' set='icons/large' __alt='Settings'}</div>
 
     <h2>{gt text='Settings'}</h2>
 
