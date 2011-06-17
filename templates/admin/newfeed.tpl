@@ -1,6 +1,6 @@
 {gt text='Create a Feed' assign='templatetitle'}
 
-{include file='admin/menu.htm'}
+{include file='admin/menu.tpl'}
 
 <div class="z-admincontainer">
     <div class="z-adminpageicon">{img modname='core' src='filenew.gif' set='icons/large' alt=$templatetitle}</div>
@@ -11,7 +11,7 @@
         <div>
             <fieldset>
                 <legend>{gt text='New Feed'}</legend>
-                <input type="hidden" name="authid" value="{insert name='generateauthkey' module='Feeds'}" />
+                <input type="hidden" name="csrftoken" value="{insert name="csrftoken"}" />
                 <div class="z-formrow">
                     <label for="feeds_feedname">{gt text='Name'}</label>
                     <input id="feeds_feedname" name="feed[name]" type="text" size="100" maxlength="100" />
@@ -38,11 +38,11 @@
                 </div>
             </fieldset>
 
-            {modcallhooks hookobject='item' hookaction='new' module='Feeds'}
-
-            <div class="z-formbuttons">
-                {button src='button_ok.gif' set='icons/small' __alt='Create' __title='Create'}
-                <a href="{modurl modname='Feeds' type='admin' func='view'}">{img modname='core' src='button_cancel.gif' set='icons/small'  __alt='Cancel' __title='Cancel'}</a>
+            {* modcallhooks hookobject='item' hookaction='new' module='Feeds' *}
+            
+            <div class="z-buttons z-formbuttons">
+                {button src="button_ok.png" set="icons/extrasmall" __alt="Save" __title="Save" __text="Save"}
+                <a href="{modurl modname="Feeds" type="admin" func='view'}" title="{gt text="Cancel"}">{img modname='core' src="button_cancel.png" set="icons/extrasmall" __alt="Cancel" __title="Cancel"} {gt text="Cancel"}</a>
             </div>
         </div>
     </form>

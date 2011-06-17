@@ -11,7 +11,7 @@
     <ul>
       {foreach from=$categories item=category}
         {* get the category name avoiding E_ALL errors *}
-        {array_field_isset assign='categoryname' array=$category.display_name field=$lang returnValue=1}
+        {array_field assign='categoryname' array=$category.display_name field=$lang}
         {if $categoryname eq ''}{assign var='categoryname' value=$category.name}{/if}
 
         {if $modvars.ZConfig.shorturls}

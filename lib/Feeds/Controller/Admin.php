@@ -1,13 +1,14 @@
 <?php
+
 /**
  * Zikula Application Framework
  *
  * @copyright (c) 2002, Zikula Development Team
  * @license GNU/GPL - http://www.gnu.org/copyleft/gpl.html
  */
-
 class Feeds_Controller_Admin extends Zikula_AbstractController
 {
+
     /**
      * the main administration function
      */
@@ -43,10 +44,7 @@ class Feeds_Controller_Admin extends Zikula_AbstractController
      */
     public function create($args)
     {
-        // Confirm authorisation code
-        if (!SecurityUtil::confirmAuthKey()) {
-            return LogUtil::registerAuthidError(ModUtil::url('Feeds', 'admin', 'view'));
-        }
+        $this->checkCsrfToken();
 
         // Get parameters from whatever input we need
         $feed = FormUtil::getPassedValue('feed', isset($args['feed']) ? $args['feed'] : null, 'POST');
@@ -113,10 +111,7 @@ class Feeds_Controller_Admin extends Zikula_AbstractController
             $feed['fid'] = $feed['objectid'];
         }
 
-        // Confirm authorisation code
-        if (!SecurityUtil::confirmAuthKey()) {
-            return LogUtil::registerAuthidError(ModUtil::url('Feeds', 'admin', 'view'));
-        }
+        $this->checkCsrfToken();
 
         // Update the feeds feed
         if (ModUtil::apiFunc('Feeds', 'admin', 'update', $feed)) {
@@ -153,7 +148,6 @@ class Feeds_Controller_Admin extends Zikula_AbstractController
         // Check for confirmation.
         if (empty($confirmation)) {
             // No confirmation yet
-
             // assign the item id.
             $this->view->assign('fid', $fid);
 
@@ -163,14 +157,10 @@ class Feeds_Controller_Admin extends Zikula_AbstractController
 
         // If we get here it means that the user has confirmed the action
 
-        // Confirm authorisation code
-        if (!SecurityUtil::confirmAuthKey()) {
-            return LogUtil::registerAuthidError(ModUtil::url('Feeds', 'admin', 'view'));
-        }
+        $this->checkCsrfToken();
 
         // Delete the feed
-        if (ModUtil::apiFunc('Feeds', 'admin', 'delete',
-        array('fid' => $fid))) {
+        if (ModUtil::apiFunc('Feeds', 'admin', 'delete', array('fid' => $fid))) {
             // Success
             LogUtil::registerStatus($this->__('Done! Feed deleted.'));
         }
@@ -188,8 +178,8 @@ class Feeds_Controller_Admin extends Zikula_AbstractController
         $startnum = FormUtil::getPassedValue('startnum', isset($args['startnum']) ? $args['startnum'] : null, 'GET');
         $property = FormUtil::getPassedValue('feeds_property', isset($args['feeds_property']) ? $args['feeds_property'] : null, 'POST');
         $category = FormUtil::getPassedValue("feeds_{$property}_category", isset($args["feeds_{$property}_category"]) ? $args["feeds_{$property}_category"] : null, 'POST');
-        $clear    = FormUtil::getPassedValue('clear', false, 'POST');
-        $purge    = FormUtil::getPassedValue('purge', false, 'GET');
+        $clear = FormUtil::getPassedValue('clear', false, 'POST');
+        $purge = FormUtil::getPassedValue('purge', false, 'GET');
 
         if ($purge) {
             if (ModUtil::apiFunc('Feeds', 'admin', 'purgepermalinks')) {
@@ -207,10 +197,9 @@ class Feeds_Controller_Admin extends Zikula_AbstractController
         // get module vars for later use
         $modvars = ModUtil::getVar('Feeds');
 
-        if ($modvars['enablecategorization'])
-        {
+        if ($modvars['enablecategorization']) {
             // load the category registry util
-            $catregistry  = CategoryRegistryUtil::getRegisteredModuleCategories('Feeds', 'feeds');
+            $catregistry = CategoryRegistryUtil::getRegisteredModuleCategories('Feeds', 'feeds');
             $properties = array_keys($catregistry);
 
             // Validate and build the category filter - mateo
@@ -231,29 +220,27 @@ class Feeds_Controller_Admin extends Zikula_AbstractController
         }
 
         // Get all the feeds
-        $items = ModUtil::apiFunc('Feeds', 'user', 'getall',
-                array('startnum' => $startnum,
-                'numitems' => $modvars['feedsperpage'],
-                'order'    => 'fid',
-                'category' => isset($catFilter) ? $catFilter : null,
-                'catregistry'  => isset($catregistry) ? $catregistry : null));
+        $items = ModUtil::apiFunc('Feeds', 'user', 'getall', array('startnum' => $startnum,
+                    'numitems' => $modvars['feedsperpage'],
+                    'order' => 'fid',
+                    'category' => isset($catFilter) ? $catFilter : null,
+                    'catregistry' => isset($catregistry) ? $catregistry : null));
 
         $feedsitems = array();
-        foreach ($items as $item)
-        {
+        foreach ($items as $item) {
             if (SecurityUtil::checkPermission('Feeds::', "$item[name]::$item[fid]", ACCESS_READ)) {
                 // Options for the item
                 $options = array();
 
-                if (SecurityUtil::checkPermission( 'Feeds::', "$item[name]::$item[fid]", ACCESS_EDIT)) {
+                if (SecurityUtil::checkPermission('Feeds::', "$item[name]::$item[fid]", ACCESS_EDIT)) {
                     $options[] = array('url' => ModUtil::url('Feeds', 'admin', 'modify', array('fid' => $item['fid'])),
-                            'image' => 'xedit.gif',
-                            'title' => $this->__('Edit'));
+                        'image' => 'xedit.gif',
+                        'title' => $this->__('Edit'));
 
-                    if (SecurityUtil::checkPermission( 'Feeds::', "$item[name]::$item[fid]", ACCESS_DELETE)) {
+                    if (SecurityUtil::checkPermission('Feeds::', "$item[name]::$item[fid]", ACCESS_DELETE)) {
                         $options[] = array('url' => ModUtil::url('Feeds', 'admin', 'delete', array('fid' => $item['fid'])),
-                                'image' => '14_layer_deletelayer.gif',
-                                'title' => $this->__('Delete'));
+                            'image' => '14_layer_deletelayer.gif',
+                            'title' => $this->__('Delete'));
                     }
                 }
                 $item['options'] = $options;
@@ -279,7 +266,7 @@ class Feeds_Controller_Admin extends Zikula_AbstractController
 
         // Assign the values for the smarty plugin to produce a pager
         $this->view->assign('pager', array('numitems' => ModUtil::apiFunc('Feeds', 'user', 'countitems', array('category' => isset($catFilter) ? $catFilter : null)),
-                'itemsperpage' => $modvars['feedsperpage']));
+            'itemsperpage' => $modvars['feedsperpage']));
 
         // Return the output that has been generated by this function
         return $this->view->fetch('admin/view.tpl');
@@ -293,11 +280,9 @@ class Feeds_Controller_Admin extends Zikula_AbstractController
     {
         $this->throwForbiddenUnless(SecurityUtil::checkPermission('Feeds::', "::", ACCESS_ADMIN), LogUtil::getErrorMsgPermission());
 
-        // Assign all module vars
-        $this->view->assign($this->getVars());
-
-        // Return the output that has been generated by this function
-        return $this->view->fetch('admin/modifyconfig.tpl');
+        return $this->view
+                ->assign('tempdir', System::getVar('temp'))
+                ->fetch('admin/modifyconfig.tpl');
     }
 
     /**
@@ -308,10 +293,7 @@ class Feeds_Controller_Admin extends Zikula_AbstractController
     {
         $this->throwForbiddenUnless(SecurityUtil::checkPermission('Feeds::', "::", ACCESS_ADMIN), LogUtil::getErrorMsgPermission());
 
-        // confirm authorisation code
-        if (!SecurityUtil::confirmAuthKey()) {
-            return LogUtil::registerAuthidError(ModUtil::url('Feeds', 'admin', 'view'));
-        }
+        $this->checkCsrfToken();
 
         // update module variables
         $enablecategorization = (bool)FormUtil::getPassedValue('enablecategorization', false, 'POST');
@@ -339,12 +321,9 @@ class Feeds_Controller_Admin extends Zikula_AbstractController
         $this->setVar('usingcronjob', $usingcronjob);
 
         // make sure a key has been generated
-        if (!ModUtil::hasVar('Feeds','key')){
+        if (!ModUtil::hasVar('Feeds', 'key')) {
             $this->setVar('key', md5(time()));
         }
-
-        // let any other modules know that the modules configuration has been updated
-        $this->callHooks('module', 'updateconfig', 'Feeds', array('module' => 'Feeds'));
 
         // the module configuration has been updated successfuly
         LogUtil::registerStatus($this->__('Done! Module configuration updated.'));
@@ -356,4 +335,5 @@ class Feeds_Controller_Admin extends Zikula_AbstractController
     {
         $this->view->setCaching(false);
     }
+
 }

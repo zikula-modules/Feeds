@@ -1,7 +1,7 @@
 {ajaxheader modname='Feeds' filename='feeds.js' nobehaviour=true noscriptaculous=true}
 {gt text='View Feeds' assign='templatetitle'}
 
-{include file='admin/menu.htm'}
+{include file='admin/menu.tpl'}
 
 <div class="z-admincontainer">
     <div class="z-adminpageicon">{img modname='core' src='windowlist.gif' set='icons/large' alt=$templatetitle}</div>
@@ -40,7 +40,7 @@
     </form>
     {/if}
 
-    <table class="z-admintable">
+    <table class="z-datatable">
         <thead>
             <tr>
                 <th>{gt text='Name'}</th>
@@ -69,8 +69,8 @@
                 </td>
             </tr>
         {sectionelse}
-            <tr class="z-admintableempty">
-                <td colspan="{if $enablecategorization}4{else}3{/if}">
+            <tr class="z-datatableempty">
+                <td colspan="{if $modvars.Feeds.enablecategorization}4{else}3{/if}">
                     {gt text='No Feeds found.'}
                 </td>
             </tr>

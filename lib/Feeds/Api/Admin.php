@@ -147,7 +147,6 @@ class Feeds_Api_Admin extends Zikula_AbstractApi
 
     /**
      * Purge the permalink fields in the Feeds table
-     * @author Mateo Tibaquira
      * @return bool true on success, false on failure
      */
     public function purgepermalinks($args)
@@ -197,7 +196,6 @@ class Feeds_Api_Admin extends Zikula_AbstractApi
     /**
      * get available admin panel links
      *
-     * @author Mark West
      * @return array array of admin links
      */
     public function getlinks()
@@ -205,14 +203,26 @@ class Feeds_Api_Admin extends Zikula_AbstractApi
         $links = array();
 
         if (SecurityUtil::checkPermission('Feeds::', '::', ACCESS_READ)) {
-            $links[] = array('url' => ModUtil::url('Feeds', 'admin', 'view'), 'text' => $this->__('View Feeds'));
+            $links[] = array(
+                'url' => ModUtil::url('Feeds', 'admin', 'view'),
+                'text' => $this->__('View Feeds'),
+                'class' => 'z-icon-es-view');
         }
         if (SecurityUtil::checkPermission('Feeds::', '::', ACCESS_ADD)) {
-            $links[] = array('url' => ModUtil::url('Feeds', 'admin', 'newfeed'), 'text' => $this->__('Create a Feed'));
+            $links[] = array(
+                'url' => ModUtil::url('Feeds', 'admin', 'newfeed'),
+                'text' => $this->__('Create a Feed'),
+                'class' => 'z-icon-es-new');
         }
         if (SecurityUtil::checkPermission('Feeds::', '::', ACCESS_ADMIN)) {
-            $links[] = array('url' => ModUtil::url('Feeds', 'admin', 'view', array('purge' => 1)), 'text' => $this->__('Purge PermaLinks'));
-            $links[] = array('url' => ModUtil::url('Feeds', 'admin', 'modifyconfig'), 'text' => $this->__('Settings'));
+            $links[] = array(
+                'url' => ModUtil::url('Feeds', 'admin', 'view', array('purge' => 1)),
+                'text' => $this->__('Purge PermaLinks'),
+                'class' => 'z-icon-es-regenerate');
+            $links[] = array(
+                'url' => ModUtil::url('Feeds', 'admin', 'modifyconfig'),
+                'text' => $this->__('Settings'),
+                'class' => 'z-icon-es-config');
         }
 
         return $links;

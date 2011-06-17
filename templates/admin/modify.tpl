@@ -1,6 +1,6 @@
 {gt text='Update Feed' assign='templatetitle'}
 
-{include file='admin/menu.htm'}
+{include file='admin/menu.tpl'}
 
 <div class="z-admincontainer">
     <div class="z-adminpageicon">{img modname='core' src='edit.gif' set='icons/large' alt=$templatetitle}</div>
@@ -9,7 +9,7 @@
 
     <form class="z-form" action="{modurl modname='Feeds' type='admin' func='update'}" method="post" enctype="application/x-www-form-urlencoded">
         <div>
-            <input type="hidden" name="authid" value="{insert name='generateauthkey' module='Feeds'}" />
+            <input type="hidden" name="csrftoken" value="{insert name="csrftoken"}" />
             <input type="hidden" name="feed[fid]" value="{$fid|safetext}" />
             <fieldset>
                 <legend>{gt text='Content'}</legend>
@@ -20,12 +20,12 @@
                 {if $enablecategorization}
                 <div class="z-formrow">
                     <label>{gt text='Category'}</label>
-                    {gt name='Choose a category' assign='lblDef'}
+                    {gt text='Choose a category' assign='lblDef'}
                     {nocache}
                     {foreach from=$categories key='property' item='category'}
-                    {array_field_isset array=$__CATEGORIES__ field=$property assign='catExists'}
+                    {array_field array=$__CATEGORIES__ field=$property assign='catExists'}
                     {if $catExists}
-                    {array_field_isset array=$__CATEGORIES__.$property field='id' returnValue=1 assign='selectedValue'}
+                    {array_field array=$__CATEGORIES__.$property field='id' assign='selectedValue'}
                     {else}
                     {assign var='selectedValue' value='0'}
                     {/if}
@@ -56,11 +56,11 @@
                 </ul>
             </fieldset>
 
-            {modcallhooks hookobject='item' hookaction='modify' hookid=$fid module='Feeds'}
+            {* modcallhooks hookobject='item' hookaction='modify' hookid=$fid module='Feeds' *}
 
-            <div class="z-formbuttons">
-                {button src='button_ok.gif' set='icons/small' __alt='Update' __title='Update'}
-                <a href="{modurl modname='Feeds' type='admin' func='view'}">{img modname='core' src='button_cancel.gif' set='icons/small' __alt='Cancel' __title='Cancel'}</a>
+            <div class="z-buttons z-formbuttons">
+                {button src="button_ok.png" set="icons/extrasmall" __alt="Save" __title="Save" __text="Save"}
+                <a href="{modurl modname="Feeds" type="admin" func='view'}" title="{gt text="Cancel"}">{img modname='core' src="button_cancel.png" set="icons/extrasmall" __alt="Cancel" __title="Cancel"} {gt text="Cancel"}</a>
             </div>
         </div>
     </form>
