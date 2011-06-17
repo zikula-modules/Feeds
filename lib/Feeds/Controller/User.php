@@ -283,6 +283,7 @@ class Feeds_Controller_User extends Zikula_AbstractController
         $this->view->assign('catID', $cat);
         $this->view->assign('FeedLinkBack', $FeedLinkBack);
         $this->view->assign('category', $catInfo);
+        $this->view->assign('property', $prop);
         $this->view->assign('startnum', $startnum);
         if (is_object($FeedInfo['feed'])) {
             $this->view->assign('feeditems', $FeedInfo['feed']->get_items($feedstartnum, $modvars['itemsperpage']));

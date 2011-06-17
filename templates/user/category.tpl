@@ -1,7 +1,6 @@
 {insert name='getstatusmsg'}
 
-{assign var='categoryname' value=$category.display_name.$lang}
-{if $categoryname eq ''}{assign var='categoryname' value=$category.name}{/if}
+{if isset($category.display_name.$lang)}{assign var='categoryname' value=$category.display_name.$lang}{else}{assign var='categoryname' value=$category.name}{/if}
 
 <div class="feed-title">
     {if $modvars.ZConfig.shorturls}
