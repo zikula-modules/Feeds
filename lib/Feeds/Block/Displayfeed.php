@@ -133,7 +133,7 @@ class Feeds_Block_Displayfeed extends Zikula_Controller_AbstractBlock
         $this->view->assign($vars);
 
         // Return output
-        return $this->view->fetch('feeds_block_displayfeed_modify.htm');
+        return $this->view->fetch('block/displayfeed_modify.tpl');
     }
 
     /**
