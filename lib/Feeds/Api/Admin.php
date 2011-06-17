@@ -205,7 +205,7 @@ class Feeds_Api_Admin extends Zikula_AbstractApi
         if (SecurityUtil::checkPermission('Feeds::', '::', ACCESS_READ)) {
             $links[] = array(
                 'url' => ModUtil::url('Feeds', 'admin', 'view'),
-                'text' => $this->__('View Feeds'),
+                'text' => $this->__('List Feeds'),
                 'class' => 'z-icon-es-view');
         }
         if (SecurityUtil::checkPermission('Feeds::', '::', ACCESS_ADD)) {

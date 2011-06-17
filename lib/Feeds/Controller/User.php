@@ -37,7 +37,7 @@ class Feeds_Controller_User extends Zikula_AbstractController
         }
 
         // get all module vars for later use
-        $modvars = $this->getVar();
+        $modvars = $this->getVars();
 
         // check if categorisation is enabled
         if ($modvars['enablecategorization']) {

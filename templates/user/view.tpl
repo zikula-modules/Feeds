@@ -25,7 +25,8 @@
 {else}
     {if $modvars.Feeds.enablecategorization and $category}
     <h3 class="feed-title">
-        {gt text='Category: %s' tag1=$category.display_name.$lang|safetext}
+        {if isset($category.display_name.$lang)}{assign var='catname' value=$category.display_name.$lang}{else}{assign var='catname' value=$category.name}{/if}
+        {gt text='Category: %s' tag1=$catname|safetext}
     </h3>
     <div class="feed-list">
         {gt text='The Feeds of this category are as follows:'}
