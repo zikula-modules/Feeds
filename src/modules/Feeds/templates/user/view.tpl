@@ -1,10 +1,8 @@
-{sitename assign='sitename'}
-
 {insert name='getstatusmsg'}
 
 {if $action eq 'subcatslist'}
     <h3 class="feed-title">
-        {gt text='Welcome to the Feeds of %s' tag1=$sitename}
+        {gt text='Welcome to the Feeds of %s' tag1=$modvars.ZConfig.sitename}
     </h3>
     <div class="feed-list">
         {gt text='Choose a category to see the Feeds that belongs to it'}
@@ -14,9 +12,9 @@
 
 
         {if $modvars.ZConfig.shorturls}
-        <li><a href="{modurl modname='Feeds' type='user' func='view' prop=$property cat=$category.path|replace:$rootCat.path:''}" title="{$category.display_desc.$lang|safetext}">{$categoryname|safetext}</a></li>
+        <li><a href="{modurl modname='Feeds' type='user' func='view' prop=$property cat=$category.path|replace:$rootCat.path:''}" title="{categoryname|safetext}">{$categoryname|safetext}</a></li>
         {else}
-        <li><a href="{modurl modname='Feeds' type='user' func='view' prop=$property cat=$category.id}" title="{$category.display_desc.$lang|safetext}">{$categoryname|safetext}</a></li>
+        <li><a href="{modurl modname='Feeds' type='user' func='view' prop=$property cat=$category.id}" title="{$categoryname|safetext}">{$categoryname|safetext}</a></li>
         {/if}
       {/foreach}
     </ul>
