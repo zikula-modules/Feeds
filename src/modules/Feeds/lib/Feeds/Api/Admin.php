@@ -47,7 +47,7 @@ class Feeds_Api_Admin extends Zikula_AbstractApi
         }
 
         // Let any hooks know that we have created a new item.
-        $this->callHooks('item', 'create', $args['fid'], array('module' => 'Feeds'));
+        //$this->callHooks('item', 'create', $args['fid'], array('module' => 'Feeds'));
 
         // Return the id of the newly created item to the calling process
         return $args['fid'];
@@ -82,7 +82,7 @@ class Feeds_Api_Admin extends Zikula_AbstractApi
         }
 
         // Let any hooks know that we have deleted an item
-        $this->callHooks('item', 'delete', $args['fid'], array('module' => 'Feeds'));
+        //$this->callHooks('item', 'delete', $args['fid'], array('module' => 'Feeds'));
 
         // Let the calling process know that we have finished successfully
         return true;
@@ -139,7 +139,7 @@ class Feeds_Api_Admin extends Zikula_AbstractApi
         }
 
         // Let any hooks know that we have updated an item.
-        $this->callHooks('item', 'update', $args['fid'], array('module' => 'Feeds'));
+        //$this->callHooks('item', 'update', $args['fid'], array('module' => 'Feeds'));
 
         // Let the calling process know that we have finished successfully
         return true;
