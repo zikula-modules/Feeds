@@ -38,8 +38,6 @@
                 </div>
             </fieldset>
 
-            {* modcallhooks hookobject='item' hookaction='new' module='Feeds' *}
-            
             <div class="z-buttons z-formbuttons">
                 {button src="button_ok.png" set="icons/extrasmall" __alt="Save" __title="Save" __text="Save"}
                 <a href="{modurl modname="Feeds" type="admin" func='view'}" title="{gt text="Cancel"}">{img modname='core' src="button_cancel.png" set="icons/extrasmall" __alt="Cancel" __title="Cancel"} {gt text="Cancel"}</a>

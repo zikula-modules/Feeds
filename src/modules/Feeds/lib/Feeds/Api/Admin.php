@@ -46,9 +46,6 @@ class Feeds_Api_Admin extends Zikula_AbstractApi
             return LogUtil::registerError($this->__('Error! Creation attempt failed.'));
         }
 
-        // Let any hooks know that we have created a new item.
-        //$this->callHooks('item', 'create', $args['fid'], array('module' => 'Feeds'));
-
         // Return the id of the newly created item to the calling process
         return $args['fid'];
     }
@@ -80,9 +77,6 @@ class Feeds_Api_Admin extends Zikula_AbstractApi
         if (!DBUtil::deleteObjectByID('feeds', $args['fid'], 'fid')) {
             return LogUtil::registerError($this->__('Error! Deletion attempt failed.'));
         }
-
-        // Let any hooks know that we have deleted an item
-        //$this->callHooks('item', 'delete', $args['fid'], array('module' => 'Feeds'));
 
         // Let the calling process know that we have finished successfully
         return true;
@@ -137,9 +131,6 @@ class Feeds_Api_Admin extends Zikula_AbstractApi
         if (!DBUtil::updateObject($args, 'feeds', '', 'fid')) {
             return LogUtil::registerError($this->__('Error! Update attempt failed.'));
         }
-
-        // Let any hooks know that we have updated an item.
-        //$this->callHooks('item', 'update', $args['fid'], array('module' => 'Feeds'));
 
         // Let the calling process know that we have finished successfully
         return true;

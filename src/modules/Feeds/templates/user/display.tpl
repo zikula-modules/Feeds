@@ -49,6 +49,4 @@
 </div>
 <div class="feed-bottom" >
     {pager show='page' rowcount=$pager.numitems limit=$pager.itemsperpage posvar='startnum' shift=1}
-    {modurl modname='Feeds' type='user' func='display' fid=$item.fid assign='returnurl'}
-    {* modcallhooks hookobject='item' hookaction='display' hookid=$item.fid module='Feeds' returnurl=$returnurl *}
 </div>
