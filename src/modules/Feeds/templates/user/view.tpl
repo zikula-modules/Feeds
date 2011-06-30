@@ -12,7 +12,7 @@
 
 
         {if $modvars.ZConfig.shorturls}
-        <li><a href="{modurl modname='Feeds' type='user' func='view' prop=$property cat=$category.path|replace:$rootCat.path:''}" title="{categoryname|safetext}">{$categoryname|safetext}</a></li>
+        <li><a href="{modurl modname='Feeds' type='user' func='view' prop=$property cat=$category.path|replace:$rootCat.path:''}" title="{$categoryname|safetext}">{$categoryname|safetext}</a></li>
         {else}
         <li><a href="{modurl modname='Feeds' type='user' func='view' prop=$property cat=$category.id}" title="{$categoryname|safetext}">{$categoryname|safetext}</a></li>
         {/if}
