@@ -16,11 +16,11 @@ function Feeds_tables()
     $dbtable = array();
 
     // Full table definition
-    $dbtable['feeds'] = DBUtil::getLimitedTablename('feeds');
-    $dbtable['feeds_column'] = array('fid'       => 'pn_fid',
-                                     'name'      => 'pn_name',
-                                     'urltitle'  => 'pn_urltitle',
-                                     'url'       => 'pn_url');
+    $dbtable['feeds'] = 'feeds';
+    $dbtable['feeds_column'] = array('fid'       => 'fid',
+                                     'name'      => 'name',
+                                     'urltitle'  => 'urltitle',
+                                     'url'       => 'url');
     $dbtable['feeds_column_def'] = array('fid'      => 'I(10) NOTNULL AUTOINCREMENT PRIMARY',
                                          'name'     => "C(255) NOTNULL DEFAULT ''",
                                          'urltitle' => "C(255) NOTNULL DEFAULT ''",
@@ -31,7 +31,7 @@ function Feeds_tables()
     $dbtable['feeds_primary_key_column'] = 'fid';
 
     // add standard data fields
-    ObjectUtil::addStandardFieldsToTableDefinition($dbtable['feeds_column'], 'pn_');
+    ObjectUtil::addStandardFieldsToTableDefinition($dbtable['feeds_column']);
     ObjectUtil::addStandardFieldsToTableDataDefinition($dbtable['feeds_column_def']);
 
     // Return the table information

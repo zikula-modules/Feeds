@@ -116,6 +116,28 @@ class Feeds_Installer extends Zikula_AbstractInstaller
             case '2.2':
             case '2.3':
             case '2.4':
+                $prefix = $this->serviceManager['prefix'];
+                $connection = Doctrine_Manager::getInstance()->getConnection('default');
+                $sqlStatements = array();
+                // N.B. statements generated with PHPMyAdmin
+                $sqlStatements[] = 'RENAME TABLE ' . $prefix . '_feeds' . " TO `feeds`";
+                $sqlStatements[] = "ALTER TABLE `feeds` 
+CHANGE `pn_fid` `fid` INT( 10 ) NOT NULL AUTO_INCREMENT ,
+CHANGE `pn_name` `name` VARCHAR( 255 ) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL DEFAULT '',
+CHANGE `pn_urltitle` `urltitle` VARCHAR( 255 ) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL DEFAULT '',
+CHANGE `pn_url` `url` VARCHAR( 255 ) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL DEFAULT '',
+CHANGE `pn_obj_status` `obj_status` CHAR( 1 ) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL DEFAULT 'A',
+CHANGE `pn_cr_date` `cr_date` DATETIME NOT NULL DEFAULT '1970-01-01 00:00:00',
+CHANGE `pn_cr_uid` `cr_uid` INT( 11 ) NOT NULL DEFAULT '0',
+CHANGE `pn_lu_date` `lu_date` DATETIME NOT NULL DEFAULT '1970-01-01 00:00:00',
+CHANGE `pn_lu_uid` `lu_uid` INT( 11 ) NOT NULL DEFAULT '0'";
+                foreach ($sqlStatements as $sql) {
+                    $stmt = $connection->prepare($sql);
+                    try {
+                        $stmt->execute();
+                    } catch (Exception $e) {
+                    }   
+                }
             // further upgrade routine
         }
 
@@ -140,8 +162,8 @@ class Feeds_Installer extends Zikula_AbstractInstaller
 
         // delete entries from category registry
         ModUtil::dbInfoLoad('Categories');
-        DBUtil::deleteWhere('categories_registry', "crg_modname = 'Feeds'");
-        DBUtil::deleteWhere('categories_mapobj', "cmo_modname = 'Feeds'");
+        DBUtil::deleteWhere('categories_registry', "modname = 'Feeds'");
+        DBUtil::deleteWhere('categories_mapobj', "modname = 'Feeds'");
 
         // deletion successful
         return true;
