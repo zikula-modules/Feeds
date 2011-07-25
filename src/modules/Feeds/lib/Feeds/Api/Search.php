@@ -27,7 +27,7 @@ class Feeds_Api_Search extends Zikula_AbstractApi
             // we can return it easily when required
             $render = Zikula_View::getInstance('Feeds');
             $render->assign('active', (isset($args['active']) && isset($args['active']['Feeds'])) || (!isset($args['active'])));
-            return $render->fetch('feeds_search_options.htm');
+            return $render->fetch('search/options.tpl');
         }
 
         return '';
