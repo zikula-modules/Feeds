@@ -116,6 +116,7 @@ class Feeds_Installer extends Zikula_AbstractInstaller
             case '2.2':
             case '2.3':
             case '2.4':
+            case '2.5':
                 $prefix = $this->serviceManager['prefix'];
                 $connection = Doctrine_Manager::getInstance()->getConnection('default');
                 $sqlStatements = array();
