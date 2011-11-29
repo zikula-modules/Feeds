@@ -12,6 +12,6 @@
  * information regarding copyright and licensing.
  */
 
-if (!PluginUtil::isAvailable('systemplugin.simplepie')) {
+if (!System::isInstalling() && !PluginUtil::isAvailable('systemplugin.simplepie')) {
     throw new Exception(__('Fatal error: SimplePie system plugin is not available'));
 }
