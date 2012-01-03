@@ -55,7 +55,8 @@
             </div>
             <div class="z-formrow">
                 <label>{gt text='Link for using a Cron Job'}</label>
-                <span><a href="{modurl fqurl=true modname='Feeds' type='user' func='updatecache' key=$modvars.Feeds.key}">{modurl fqurl=true modname='Feeds' type='user' func='updatecache' key=$modvars.Feeds.key}</a></span>
+                <span><a href="{modurl fqurl=true forcelongurl=true modname='Feeds' type='user' func='updatecache' key=$modvars.Feeds.key}">{modurl fqurl=true forcelongurl=true modname='Feeds' type='user' func='updatecache' key=$modvars.Feeds.key}</a></span>
+                <em class="z-formnote z-sub">{gt text='This link should not be shortened by shorturls, otherwise the parameter "key" is not submitted.'}</em>
             </div>
         </fieldset>
         <div class="z-buttons z-formbuttons">
