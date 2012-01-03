@@ -81,7 +81,7 @@ VALUES ";
             $item = $result->GetRowAssoc(2);
             if (SecurityUtil::checkPermission('Feeds::item', "$item[name]::$item[id]", ACCESS_READ)) {
                 $sql = $insertSql . '('
-                        . '\'' . _FEEDS_SEARCH . ': ' . DataUtil::formatForStore($item['title']) . '\', '
+                        . '\'' . $this->__('Feeds Search') . ': ' . DataUtil::formatForStore($item['title']) . '\', '
                         . '\'' . DataUtil::formatForStore($item['text']) . '\', '
                         . '\'' . DataUtil::formatForStore($item['id']) . '\', '
                         . '\'' . DataUtil::formatForStore($item['date']) . '\', '
