@@ -18,7 +18,7 @@
 </h3>
 
 <div class="feed-list">
-    <p>{gt text='URL'} : {$item.url}</p>
+    <p>{gt text='URL'} : {$item.url|safehtml}</p>
     {assign var='feeditems' value=$feed->get_items($feedstartnum, $modvars.Feeds.itemsperpage)}
     {foreach from=$feeditems item='feeditem'}
     <div class="feeditem">

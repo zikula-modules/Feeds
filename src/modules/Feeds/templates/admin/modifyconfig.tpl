@@ -13,10 +13,12 @@
                 <label for="feeds_enablecategorization">{gt text='Enable categorization'}</label>
                 <input id="feeds_enablecategorization" type="checkbox" name="enablecategorization"{if $modvars.Feeds.enablecategorization} checked="checked"{/if} />
             </div>
+            <!--[*
             <div class="z-formrow">
                 <label for="feeds_bold">{gt text='Display item names in bold'}</label>
                 <input id="feeds_bold" name="bold" type="checkbox" value="1"{if $modvars.Feeds.bold eq 1} checked="checked"{/if} />
             </div>
+            *]-->
             <div class="z-formrow">
                 <label for="feeds_openinnewwindow">{gt text='Open links in new browser window'}</label>
                 <input id="feeds_openinnewwindow" name="openinnewwindow" type="checkbox" value="1"{if $modvars.Feeds.openinnewwindow eq 1} checked="checked"{/if} />
