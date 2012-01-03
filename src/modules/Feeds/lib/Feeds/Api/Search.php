@@ -27,7 +27,7 @@ class Feeds_Api_Search extends Zikula_AbstractApi
             // we can return it easily when required
             $render = Zikula_View::getInstance('Feeds');
             $render->assign('active', (isset($args['active']) && isset($args['active']['Feeds'])) || (!isset($args['active'])));
-            return $render->fetch('feeds_search_options.htm');
+            return $render->fetch('search/options.tpl');
         }
 
         return '';
@@ -81,7 +81,7 @@ VALUES ";
             $item = $result->GetRowAssoc(2);
             if (SecurityUtil::checkPermission('Feeds::item', "$item[name]::$item[id]", ACCESS_READ)) {
                 $sql = $insertSql . '('
-                        . '\'' . _FEEDS_SEARCH . ': ' . DataUtil::formatForStore($item['title']) . '\', '
+                        . '\'' . $this->__('Feeds Search') . ': ' . DataUtil::formatForStore($item['title']) . '\', '
                         . '\'' . DataUtil::formatForStore($item['text']) . '\', '
                         . '\'' . DataUtil::formatForStore($item['id']) . '\', '
                         . '\'' . DataUtil::formatForStore($item['date']) . '\', '
