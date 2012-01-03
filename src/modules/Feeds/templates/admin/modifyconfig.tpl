@@ -28,10 +28,6 @@
                 <input id="feeds_itemsperpage" type="text" name="itemsperpage" size="3" value="{$modvars.Feeds.itemsperpage|safetext}" />
             </div>
             <div class="z-formrow">
-                <label for="feeds_feedsperpage">{gt text='Number of feeds to list per page'}</label>
-                <input id="feeds_feedsperpage" type="text" name="feedsperpage" size="3" value="{$modvars.Feeds.feedsperpage|safetext}" />
-            </div>
-            <div class="z-formrow">
                 <label for="feeds_multifeedlimit">{gt text='Maximum items to add per feed'}</label>
                 <input id="feeds_multifeedlimit" type="text" name="multifeedlimit" size="3" value="{$modvars.Feeds.multifeedlimit|safetext}" />
                 <em class="z-formnote">{gt text='for combined feeds (0 to add all)'}</em>
