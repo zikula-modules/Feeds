@@ -14,7 +14,7 @@ class Feeds_Version extends Zikula_AbstractVersion
         $meta['displayname']    = __('Feeds');
         $meta['description']    = __('The Feeds module provides a feed reader to your website.');
         $meta['url']            = __(/*!module name that appears in URL*/'feeds');
-        $meta['version']        = '2.6.0';
+        $meta['version']        = '2.6.1';
         $meta['core_min']       = '1.3.0'; // Fixed to 1.3.x range
         $meta['core_max']       = '1.3.99'; // Fixed to 1.3.x range
         $meta['contact']        = 'http://zikula.org/';
