@@ -30,7 +30,7 @@
             <div class="z-formrow">
                 <label for="feeds_multifeedlimit">{gt text='Maximum items to add per feed'}</label>
                 <input id="feeds_multifeedlimit" type="text" name="multifeedlimit" size="3" value="{$modvars.Feeds.multifeedlimit|safetext}" />
-                <em class="z-formnote">{gt text='for combined feeds (0 to add all)'}</em>
+                <em class="z-formnote z-sub">{gt text='This is a per feed limit that applies if multiple feeds are used combined. For example in the category view function. (0 to add all)'}</em>
             </div>
         </fieldset>
         <fieldset>
@@ -38,12 +38,12 @@
             <div class="z-formrow">
                 <label for="feeds_cachedirectory">{gt text='Cache directory for feeds'}</label>
                 <input id="feeds_cachedirectory" type="text" name="cachedirectory" size="30" value="{$modvars.Feeds.cachedirectory|safetext}" />
-                <em class="z-formnote">{gt text="(relative to [%s])" tag1=$tempdir}</em>
+                <em class="z-formnote z-sub">{gt text="Relative to [%s]" tag1=$tempdir}</em>
             </div>
             <div class="z-formrow">
                 <label for="feeds_cacheinterval">{gt text='Cache interval for feeds'}</label>
                 <input id="feeds_cacheinterval" type="text" name="cacheinterval" size="3" value="{$modvars.Feeds.cacheinterval|safetext}" />
-                <em class="z-formnote">{gt text='in seconds (3600 = 1 hour)'}</em>
+                <em class="z-formnote z-sub">{gt text='In seconds (3600 = 1 hour)'}</em>
             </div>
         </fieldset>
         <fieldset>
@@ -51,7 +51,7 @@
             <div class="z-formrow">
                 <label for="feeds_usingcronjob">{gt text='Using a Cron Job to update the cache'}</label>
                 <input id="feeds_usingcronjob" name="usingcronjob" type="checkbox" value="1"{if $modvars.Feeds.usingcronjob eq 1} checked="checked"{/if} />
-                <em class="z-formnote">{gt text='(see instructions)'}</em>
+                <em class="z-formnote z-sub">{gt text='See instructions'}</em>
             </div>
             <div class="z-formrow">
                 <label>{gt text='Link for using a Cron Job'}</label>
