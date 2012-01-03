@@ -38,9 +38,12 @@ class Feeds_Api_Search extends Zikula_AbstractApi
      **/
     public function search($args)
     {
+        if (!SecurityUtil::checkPermission('Feeds::', '::', ACCESS_READ)) {
+            return true;
+        }
+
         ModUtil::dbInfoLoad('Search');
         $pntable = DBUtil::getTables();
-        $feedstable = $pntable['feeds'];
         $feedscolumn = $pntable['feeds_column'];
         $searchTable = $pntable['search_result'];
         $searchColumn = $pntable['search_result_column'];
@@ -51,18 +54,17 @@ class Feeds_Api_Search extends Zikula_AbstractApi
 
         $sessionId = session_id();
 
-        $sql = "
-SELECT
-                $feedscolumn[name] as title,
-   '' as text,
-                $feedscolumn[fid] as id,
-                $feedscolumn[cr_date] as date
-FROM $feedstable
-WHERE $where";
+        // define the permission filter to apply
+        $permFilter = array(array('realm'          => 0,
+                        'component_left' => 'Feeds',
+                        'instance_left'  => 'fid',
+                        'instance_right' => '',
+                        'level'          => ACCESS_READ));
 
-        $result = DBUtil::executeSQL($sql);
-        if (!$result) {
-            return LogUtil::registerError($this->__('Error! Could not load any Feed.'));
+        // get the result set
+        $objArray = DBUtil::selectObjectArray('feeds', $where, 'fid', 1, -1, '', $permFilter);
+        if ($objArray === false) {
+            return LogUtil::registerError($this->__('Error! Could not load items.'));
         }
 
         $insertSql =
@@ -75,22 +77,18 @@ WHERE $where";
                 $searchColumn[session])
 VALUES ";
 
-
         // Process the result set and insert into search result table
-        for (; !$result->EOF; $result->MoveNext()) {
-            $item = $result->GetRowAssoc(2);
-            if (SecurityUtil::checkPermission('Feeds::item', "$item[name]::$item[id]", ACCESS_READ)) {
-                $sql = $insertSql . '('
-                        . '\'' . $this->__('Feeds Search') . ': ' . DataUtil::formatForStore($item['title']) . '\', '
-                        . '\'' . DataUtil::formatForStore($item['text']) . '\', '
-                        . '\'' . DataUtil::formatForStore($item['id']) . '\', '
-                        . '\'' . DataUtil::formatForStore($item['date']) . '\', '
+        foreach ($objArray as $obj) {
+            $sql = $insertSql . '('
+                        . '\'' . DataUtil::formatForStore($obj['name']) . '\', '
+                        . '\'' . '\', '
+                        . '\'' . DataUtil::formatForStore($obj['fid']) . '\', '
+                        . '\'' . DataUtil::formatForStore($obj['cr_date']) . '\', '
                         . '\'' . 'Feeds' . '\', '
                         . '\'' . DataUtil::formatForStore($sessionId) . '\')';
-                $insertResult = DBUtil::executeSQL($sql);
-                if (!$insertResult) {
-                    return LogUtil::registerError($this->__('Error! Could not load any Feed.'));
-                }
+            $insertResult = DBUtil::executeSQL($sql);
+            if (!$insertResult) {
+                return LogUtil::registerError(__('Error! Could not load items.', $dom));
             }
         }
 
@@ -103,13 +101,11 @@ VALUES ";
      * Access checking is ignored since access check has
      * already been done. But we do add a URL to the found item
      */
-    public function search_check(&$args)
+    public function search_check($args)
     {
         $datarow = &$args['datarow'];
         $feedsId = $datarow['extra'];
-
         $datarow['url'] = ModUtil::url('Feeds', 'user', 'display', array('fid' => $feedsId));
-
         return true;
     }
 
