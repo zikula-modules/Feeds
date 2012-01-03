@@ -1,3 +1,4 @@
+<h2><a href="{modurl modname='Feeds' type='user' func='main'}">{gt text='Feeds'}</a></h2>
 {insert name='getstatusmsg'}
 
 {if isset($category.display_name.$lang)}{assign var='categoryname' value=$category.display_name.$lang}{else}{assign var='categoryname' value=$category.name}{/if}

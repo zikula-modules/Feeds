@@ -1,3 +1,4 @@
+<h2><a href="{modurl modname='Feeds' type='user' func='main'}">{gt text='Feeds'}</a></h2>
 {insert name='getstatusmsg'}
 
 {assign var='link' value=$feed->get_image_link()}

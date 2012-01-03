@@ -1,3 +1,4 @@
+<h2><a href="{modurl modname='Feeds' type='user' func='main'}">{gt text='Feeds'}</a></h2>
 {insert name='getstatusmsg'}
 
 {if $action eq 'subcatslist'}
@@ -28,7 +29,7 @@
     <div class="feed-list">
         {gt text='The Feeds of this category are as follows:'}
         <ul>
-            <li><a href="{modurl modname='Feeds' type='user' func='category' cat=$category.id}">{gt text='View all feeds'}</a></li>
+            <li><a href="{modurl modname='Feeds' type='user' func='category' cat=$category.id}">{gt text='View all feeds in this category'}</a></li>
     {else}
     <h3 class="feed-title">
         {gt text='Feeds list'}
