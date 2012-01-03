@@ -29,7 +29,6 @@ class Feeds_Installer extends Zikula_AbstractInstaller
                 'cachedirectory' => 'feeds',
                 'cacheinterval' => 180,
                 'multifeedlimit' => 0,
-                'feedsperpage' => 10,
                 'usingcronjob' => 0,
                 'key' => md5(time())
         );
@@ -139,6 +138,9 @@ CHANGE `pn_lu_uid` `lu_uid` INT( 11 ) NOT NULL DEFAULT '0'";
                     } catch (Exception $e) {
                     }   
                 }
+            case '2.6.0':
+                $this->delVar('feedsperpage');
+            case '2.6.1':
             // further upgrade routine
         }
 

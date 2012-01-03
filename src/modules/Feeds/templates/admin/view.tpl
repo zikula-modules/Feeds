@@ -1,5 +1,12 @@
-{ajaxheader modname='Feeds' filename='feeds.js' nobehaviour=true noscriptaculous=true}
+{ajaxheader modname='Feeds' filename='feeds.js' nobehaviour=true noscriptaculous=true ui=true}
 {adminheader}
+{pageaddvarblock}
+<script type="text/javascript">
+    document.observe("dom:loaded", function() {
+        Zikula.UI.Tooltips($$('.tooltips'));
+    });
+</script>
+{/pageaddvarblock}
 <div class="z-admin-content-pagetitle">
     {icon type="view" size="small"}
     <h3>{gt text='View feeds'}</h3>
@@ -49,7 +56,7 @@
             {if $enablecategorization}
             <th>{gt text='Category'}</th>
             {/if}
-            <th class="z-right">{gt text='Actions'}</th>
+            <th class="z-nowrap z-right">{gt text='Actions'}</th>
         </tr>
     </thead>
     <tbody>
@@ -58,14 +65,14 @@
             <td>{$feedsitems[feedsitems].name|safetext}</td>
             <td>{$feedsitems[feedsitems].url|safetext}</td>
             {if $enablecategorization}
-            <td>
+            <td class="z-nowrap">
                 {assignedcategorieslist item=$feedsitems[feedsitems]}
             </td>
             {/if}
-            <td class="z-right">
+            <td class="z-nowrap z-right">
                 {assign var='options' value=$feedsitems[feedsitems].options}
                 {section name='options' loop=$options}
-                <a href="{$options[options].url|safetext}">{img modname='core' set='icons/extrasmall' src=$options[options].image title=$options[options].title alt=$options[options].title}</a>
+                <a href="{$options[options].url|safetext}">{img modname='core' set='icons/extrasmall' src=$options[options].image title=$options[options].title alt=$options[options].title class='tooltips'}</a>
                 {/section}
             </td>
         </tr>

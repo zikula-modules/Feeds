@@ -102,7 +102,7 @@ class Feeds_Controller_User extends Zikula_AbstractController
 
             // Get all matching feeds
             $items = ModUtil::apiFunc('Feeds', 'user', 'getall', array('startnum' => $startnum,
-                        'numitems' => $modvars['feedsperpage'],
+                        'numitems' => $modvars['itemsperpage'],
                         'category' => isset($catFilter) ? $catFilter : null,
                         'catregistry' => isset($catregistry) ? $catregistry : null));
 
@@ -112,7 +112,7 @@ class Feeds_Controller_User extends Zikula_AbstractController
 
             // assign the values for the smarty plugin to produce a pager
             $this->view->assign('pager', array('numitems' => ModUtil::apiFunc('Feeds', 'user', 'countitems', array('category' => isset($catFilter) ? $catFilter : null)),
-                'itemsperpage' => $modvars['feedsperpage']));
+                'itemsperpage' => $modvars['itemsperpage']));
 
             // assign the items to the template
             $this->view->assign('items', $items);
