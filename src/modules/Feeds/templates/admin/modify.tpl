@@ -34,7 +34,7 @@
             <div class="z-formrow">
                 <label for="feeds_urltitle">{gt text='PermaLink URL title'}</label>
                 <input id="feeds_urltitle" name="feed[urltitle]" type="text" size="32" maxlength="255" value="{$urltitle|safetext}" />
-                <em class="z-formnote">{gt text='(Blank = auto-generate)'}</em>
+                <em class="z-formnote z-sub">{gt text='(Blank = auto-generate)'}</em>
             </div>
             <div class="z-formrow">
                 <label for="feeds_url">{gt text='URL'}</label>

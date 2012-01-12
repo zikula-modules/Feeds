@@ -181,6 +181,10 @@ class Feeds_Controller_Admin extends Zikula_AbstractController
         $clear = FormUtil::getPassedValue('clear', false, 'POST');
         $purge = FormUtil::getPassedValue('purge', false, 'GET');
 
+        if (!PluginUtil::isAvailable('systemplugin.simplepie')) {
+            LogUtil::registerError($this->__('<strong>Fatal error: The required SimplePie system plugin is not available.</strong><br /><br />Zikula ships with the SimplePie plugin located in the docs/examples/plugins/ExampleSystemPlugin/SimplePie directory. It must be copied (or symlinked) from there and pasted into the /plugins directory. The plugin must then be installed. This is done via the Extensions module. Click on the System Plugins menu item and install the SimplePie plugin.'));
+        }
+
         if ($purge) {
             if (ModUtil::apiFunc('Feeds', 'admin', 'purgepermalinks')) {
                 LogUtil::registerStatus($this->__('Purging of the pemalinks was successful'));

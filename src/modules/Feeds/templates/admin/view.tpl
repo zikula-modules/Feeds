@@ -63,7 +63,9 @@
         {section name='feedsitems' loop=$feedsitems}
         <tr class="{cycle values='z-odd,z-even'}">
             <td>{$feedsitems[feedsitems].name|safetext}</td>
-            <td>{$feedsitems[feedsitems].url|safetext}</td>
+            <td>
+                <a class="tooltips" href="{$feedsitems[feedsitems].url|safetext}" title="{$feedsitems[feedsitems].name|safetext}">{$feedsitems[feedsitems].url|safetext}</a>
+            </td>
             {if $enablecategorization}
             <td class="z-nowrap">
                 {assignedcategorieslist item=$feedsitems[feedsitems]}
