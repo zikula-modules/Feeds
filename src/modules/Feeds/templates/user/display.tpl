@@ -7,9 +7,9 @@
     {assign var='image' value=$feed->get_image_url()}
     {assign var='title' value=$feed->get_image_title()}
     {if $link neq ''}
-    <a href="{$link|safetext}"><img src="{$image}" alt="{$title|safetext}" /></a>
+    <a href="{$link}"><img src="{$image}" alt="{$title|safetext}" /></a>
     {else}
-    <img src="{$link|safetext}" alt="{$title|safetext}" />
+    <img src="{$link}" alt="{$title|safetext}" />
     {/if}
 </div>
 {/if}
@@ -32,7 +32,7 @@
         {assign var='feeditemauthor' value=$feeditemauthorid->get_name()}
         {/if}
         <h4 class="feeditem-title">
-            <a href="{$feeditemlink|safetext}" {if $modvars.Feeds.openinnewwindow eq 1}target="_blank"{/if}>{$feeditemtitle|safetext}</a>
+            <a href="{$feeditemlink}" {if $modvars.Feeds.openinnewwindow eq 1}target="_blank"{/if}>{$feeditemtitle|safetext}</a>
         </h4>
         <span class="feeditem-info" >
             {$feeditemdate|dateformat:'%I:%M %p %A, %B %e, %Y'}
@@ -44,7 +44,7 @@
         {if $feeditemdescription neq ''}
         <div class="feeditem-text">{$feeditemdescription|safehtml}</div>
         <span class="feeditem-more">
-            <a href="{$feeditemlink|safetext}" {if $modvars.Feeds.openinnewwindow eq 1}target="_blank"{/if}>{gt text='Read more'}</a>
+            <a href="{$feeditemlink}" {if $modvars.Feeds.openinnewwindow eq 1}target="_blank"{/if}>{gt text='Read more'}</a>
         </span>
         {/if}
     </div>

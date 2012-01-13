@@ -250,6 +250,14 @@ class Feeds_Api_User extends Zikula_AbstractApi
             }
         }
 
+        // category function
+        if ($args['func'] == 'category' && isset($args['args']['cat'])) {
+            $vars .= $args['args']['cat'];
+            if (isset($args['args']['startnum'])) {
+                $vars .= '/startnum/'.$args['args']['startnum'];
+            }
+        }
+
         // for the display function use either the title (if present) or the page id
         if ($args['func'] == 'display') {
             // check for the generic object id parameter
@@ -276,6 +284,9 @@ class Feeds_Api_User extends Zikula_AbstractApi
         } else {
             return $args['modname'] . '/' . $args['func'] . '/' . $vars . '/';
         }
+
+
+
     }
 
     /**
@@ -292,7 +303,7 @@ class Feeds_Api_User extends Zikula_AbstractApi
         }
 
         // define the available user functions
-        $funcs = array('main', 'view', 'display');
+        $funcs = array('main', 'view', 'display', 'category');
         // set the correct function name based on our input
         if (empty($args['vars'][2])) {
             System::queryStringSetVar('func', 'main');
@@ -322,6 +333,13 @@ class Feeds_Api_User extends Zikula_AbstractApi
             }
         }
 
+        // category function
+        if (FormUtil::getPassedValue('func') == 'category') {
+            if (is_numeric($args['vars'][$nextvar])) {
+                System::queryStringSetVar('cat', $args['vars'][$nextvar]);
+            }
+        }
+        
         // identify the correct parameter to identify the page
         if (FormUtil::getPassedValue('func') == 'display') {
             if (is_numeric($args['vars'][$nextvar])) {

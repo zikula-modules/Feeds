@@ -255,6 +255,9 @@ class Feeds_Controller_User extends Zikula_AbstractController
             return LogUtil::registerError($this->__('Invalid category'));
         }
 
+        $rootCat = CategoryUtil::getCategoryByID($catregistry[$prop]);
+        $rootCat['path'] .= '/'; // add this to make the relative paths of the subcategories with ease
+
         // Get all matching feeds
         $items = ModUtil::apiFunc('Feeds', 'user', 'getall', array('category' => isset($catFilter) ? $catFilter : null,
                     'catregistry' => isset($catregistry) ? $catregistry : null));
@@ -270,10 +273,9 @@ class Feeds_Controller_User extends Zikula_AbstractController
                 $feed = ModUtil::apiFunc('Feeds', 'user', 'get', array('fid' => $item['fid']));
                 if ($feed != false) {
                     $furls[] = $feed['url'];
-                    $FeedLinkBack[$feed['url']] = array('name' => $feed['name'], 'fid' => $feed['fid'], 'url' => $feed['url']);
+                    $FeedLinkBack[DataUtil::formatForDisplayHTML($feed['url'])] = array('name' => $feed['name'], 'fid' => $feed['fid'], 'url' => $feed['url']);
                 }
             }
-
             // read the feed sources
             $FeedInfo = ModUtil::apiFunc('Feeds', 'user', 'getfeed', array('furl' => $furls, 'limit' => $modvars['multifeedlimit']));
         }
@@ -281,6 +283,7 @@ class Feeds_Controller_User extends Zikula_AbstractController
         // Display details of the item.
         $this->view->assign('lang', ZLanguage::getLanguageCode());
         $this->view->assign('catID', $cat);
+        $this->view->assign('rootCat', $rootCat);
         $this->view->assign('FeedLinkBack', $FeedLinkBack);
         $this->view->assign('category', $catInfo);
         $this->view->assign('property', $prop);
