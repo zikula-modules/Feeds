@@ -144,6 +144,10 @@ class Feeds_Api_User extends Zikula_AbstractApi
      */
     public function getfeed($args)
     {
+        if (!PluginUtil::isAvailable('systemplugin.simplepie')) {
+            throw new Exception(__('<strong>Fatal error: The required SimplePie system plugin is not available.</strong>'));
+        }
+
         // Argument check
         if ((!isset($args['fid']) || !is_numeric($args['fid']))
                 && (!isset($args['furl']) || (!is_string($args['furl']) && (!is_array($args['furl']))))) {
