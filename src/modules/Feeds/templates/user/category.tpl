@@ -12,7 +12,6 @@
 </div>
 
 <div class="feed-list">
-    <p>&nbsp;</p>
     {foreach from=$feeditems item='feeditem'}
     <div class="feeditem">
         {assign var='feeditemlink' value=$feeditem->get_link()}
@@ -26,12 +25,13 @@
         {if $feeditemauthorid}
             {assign var='feeditemauthor' value=$feeditemauthorid->get_name()}
         {/if}
+
         <div class="feeditem-title">
-            <a href="{$feeditemlink|safetext}" {if $modvars.Feeds.openinnewwindow eq 1}target="_blank"{/if}>{$feeditemtitle|safetext}</a>
+            <a href="{$feeditemlink}" {if $modvars.Feeds.openinnewwindow eq 1}target="_blank"{/if}>{$feeditemtitle|safetext}</a>
         </div>
         <div class="feeditem-info">
             {$feeditemdate|dateformat:'%I:%M %p %A, %B %e, %Y'}
-            &nbsp;-&nbsp;
+            &nbsp;
             <a href="{modurl modname='Feeds' type='user' func='display' fid=$FeedLinkInfo.fid}" title="{$FeedLinkInfo.name|safetext}">{$FeedLinkInfo.name|safetext}</a>
             &nbsp;
             {if $feeditemauthor neq ''}
@@ -40,9 +40,9 @@
         </div>
         <div class="feeditem-text">
             {if $feeditemdescription neq ''}
-                <p>{$feeditemdescription|safehtml}</p>
+                <div>{$feeditemdescription|safehtml}</div>
                 <div class="feeditem-more">
-                    <a href="{$feeditemlink|safetext}" {if $modvars.Feeds.openinnewwindow eq 1}target="_blank"{/if}>{gt text='Read more'}</a>
+                    <a href="{$feeditemlink}" {if $modvars.Feeds.openinnewwindow eq 1}target="_blank"{/if}>{gt text='Read more'}</a>
                 </div>
             {/if}
         </div>
